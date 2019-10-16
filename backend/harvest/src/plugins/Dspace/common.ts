@@ -15,13 +15,15 @@ const langISO = require('iso-639-1')
 let moment = require('moment')
 export class common implements Harvester {
     repo: any
+    url = ""
     esClient: Client;
     repeatJobs: Queue;
     fetchQueue: Queue;
     indexQueue: Queue;
     fetchJobTitle: string = "Fetch Data"
     indexJobTitle: string = "Index Data"
-    attempts: number = 10;
+    attempts: number = 0;
+    apikey = "2176c299d31d4f9edfa2540ce7164221858394b8"
     constructor(repo: any) {
         this.repo = repo;
         this.fetchJobTitle += " from " + this.repo.name
@@ -41,6 +43,7 @@ export class common implements Harvester {
         this.repeatJobs = new Bull(this.repo.name + '_repeat', { redis: config.redis });
 
         this.esClient = new Client(this.conf());
+        this.url = this.repo.itemsEndPoint + '?type=technologies';
     }
 
     conf() {
@@ -48,25 +51,30 @@ export class common implements Harvester {
     }
     fetch = (job: any, done: any) => {
         job.progress(20);
-        let offset = job.data.page * 50;
-        let page = job.data.page + job.data.pipe
+        let url = job.data.url
 
         request({
-            url: this.repo.itemsEndPoint + '&limit=50&offset=' + offset,
+            headers: { "Authorization": `Token ${this.apikey}` },
+            url,
             method: "GET",
+
         }, (error, response, body) => {
             job.progress(50);
             if (!error) {
                 if (response.statusCode == 200) {
-                    let data: Array<any> = JSON.parse(body)
-                    if (data.length == 0) {
-                        let error = new Error('no data exist on page ' + job.data.page + ' and offset ' + offset);
+                    let data: any = JSON.parse(body)
+                    if (data.next)
+                        done(null, data.next);
+                    if (data.results.length == 0) {
+                        let error = new Error('no data exist on page ' + job.data.page + ' and offset ');
                         error.name = "NoData"
                         done(error);
                     }
                     else {
-                        this.fetchQueue.add(this.fetchJobTitle, { page, pipe: job.data.pipe }, { attempts: this.attempts })
-                        this.indexQueue.add(this.indexJobTitle, { data })
+                        data.results.forEach((element: any) => {
+                            this.indexQueue.add(this.indexJobTitle, { data: element })
+                        });
+                          this.fetchQueue.add(this.fetchJobTitle, { url: data.next }, { attempts: this.attempts })
                         job.progress(100);
                         done();
                     }
@@ -83,76 +91,98 @@ export class common implements Harvester {
 
 
     index = (job: any, done: any) => {
+        job.progress(20);
 
-
+    
         let finaldata: Array<any> = [];
-        job.progress(0);
-        job.data.data.forEach((item: any) => {
-            let formated = this.format(item, this.repo.schema);
 
-            // TODO
-            if (formated.date) {
-                if (_.isArray(formated.date))
-                    formated.date = formated.date[0];
-                formated.date = moment(new Date(formated.date)).format('YYYY-MM-DD')
-                if (!formated['year'])
-                    formated['year'] = formated.date.split("-")[0]
-            }
-            formated['repo'] = this.repo.name;
-            // End TODO
+        request({
+            headers: { "Authorization": `Token ${this.apikey}` },
+            url: this.repo.itemsEndPoint + job.data.data.code,
+            method: "GET",
 
-            finaldata.push({ index: { _index: config.temp_index, _type: config.index_type, _id: this.repo.name + "_" + formated.id } });
-            finaldata.push(formated);
-        });
-        job.progress(50);
+        }, (error, response, body) => {
+            job.progress(50);
+            if (!error) {
+                if (response.statusCode == 200) {
+                    let data: any = JSON.parse(body)
+                    let formated = this.format(data);
+                    finaldata.push({ index: { _index: config.temp_index, _type: config.index_type, _id: job.data.data.code } });
+                    finaldata.push(formated);
+                    this.esClient.bulk({
+                        refresh: 'wait_for',
+                        body: finaldata
+                    }, (err: Error, resp: any) => {
+                        job.progress(90);
+                        if (err)
+                            done(err)
+                        resp.items.forEach((item: any) => {
+                            if (item.index.status != 200 && item.index.status != 201) {
+                                let error = new Error('error update or create item ' + item.index._id);
+                                error.stack = JSON.stringify(item);
+                                console.log(item)
+                            }
+                        })
+                        job.progress(100);
+                        done(null, resp.items)
 
-        this.esClient.bulk({
-            refresh: 'wait_for',
-            body: finaldata
-        }, (err: Error, resp: any) => {
-            job.progress(90);
-            if (err)
-                done(err)
-            resp.items.forEach((item: any) => {
-                //item.index.status
-                if (item.index.status != 200 && item.index.status != 201) {
-                    let error = new Error('error update or create item ' + item.index._id);
-                    error.stack = JSON.stringify(item);
-                    console.log(item)
+                    })
+
                 }
+            } else
+                done(error)
 
-            })
-            job.progress(100);
-            done(null, resp.items)
         });
+        // finaldata.push({ index: { _index: config.temp_index, _type: config.index_type, _id: this.repo.name + "_" + formated.id } });
+        // finaldata.push(formated);
+        // this.esClient.bulk({
+        //     refresh: 'wait_for',
+        //     body: finaldata
+        // }, (err: Error, resp: any) => {
+        //     job.progress(90);
+        //     if (err)
+        //         done(err)
+        //     resp.items.forEach((item: any) => {
+        //         //item.index.status
+        //         if (item.index.status != 200 && item.index.status != 201) {
+        //             let error = new Error('error update or create item ' + item.index._id);
+        //             error.stack = JSON.stringify(item);
+        //             console.log(item)
+        //         }
+
+        //     })
+        //     job.progress(100);
+        //     done(null, resp.items)
+        // });
     }
 
-    format(json: any, schema: any) {
-        let finalValues: any = {}
-        _.each(schema, (item: any, index: string) => {
-            if (json[index]) {
-                if (_.isArray(item)) {
-                    _.each(item, (subItem: any, subIndex: string) => {
-                        let values = json[index].
-                            filter((d: any) => d[Object.keys(subItem.where)[0]] == subItem.where[Object.keys(subItem.where)[0]])
-                            .map((d: any) => subItem.prefix ? subItem.prefix + this.mapIt(d[Object.keys(subItem.value)[0]], subItem.addOn ? subItem.addOn : null) : this.mapIt(d[Object.keys(subItem.value)[0]], subItem.addOn ? subItem.addOn : null))
-                        if (values.length)
-                            finalValues[subItem.value[Object.keys(subItem.value)[0]]] = this.getArrayOrValue(values)
-                    })
-                }
-                else if (_.isObject(item)) {
-                    if (_.isArray(json[index])) {
-                        let values = this.getArrayOrValue(json[index].map((d: any) => this.mapIt(d[Object.keys(item)[0]])))
-                        if (values)
-                            finalValues[<string>Object.values(item)[0]] = values
-                    }
-                }
-                else
-                    finalValues[index] = this.mapIt(json[index])
-            }
-        })
-        return finalValues;
+    format(jsonData: any) {
 
+        let finalObj: any = {}
+        this.traverse(jsonData, (obj: any, key: any, val: any) => {
+            if (key == "value" && val && val[0] && val[0]) {
+                if (val[0].key && val[0].values) {
+                    finalObj[val[0].key] = val[0].values
+                }
+                if (Array.isArray(val)) {
+                    val.forEach(element => {
+                        if (element.key && element.value) {
+                            if (finalObj[element.key] && !Array.isArray(finalObj[element.key]))
+                                finalObj[element.key] = [finalObj[element.key]]
+                            if (Array.isArray(finalObj[element.key])) {
+                                if (finalObj[element.key].indexOf(element.value) === -1 && element.value)
+                                    finalObj[element.key].push(element.value)
+                            } else
+                                finalObj[element.key] = element.value
+                        }
+
+                    });
+                }
+            }
+
+
+        })
+        return finalObj;
     }
 
     capitalizeFirstLetter(string: string) {
@@ -175,6 +205,15 @@ export class common implements Harvester {
             return values
         else
             return values[0]
+    }
+
+    async traverse(o: any, fn: (obj: any, prop: string, value: any) => void) {
+        for (const i in o) {
+            fn.apply(this, [o, i, o[i]]);
+            if (o[i] !== null && typeof (o[i]) === 'object') {
+                this.traverse(o[i], fn);
+            }
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="loading" [strokeWidth]="1"></mat-spinner>
 
 <img
-  *ngIf="!source.thumbnail"
+  *ngIf="!source.Image"
   alt="162x120"
   class="publication-image"
   src="assets/no-thumbnail-available.jpg"
@@ -10,5 +10,5 @@
 />
 
 
-<img *ngIf="source.thumbnail" alt="162x120" [src]="source.thumbnail | getFirstImage" class="publication-image" [hidden]="loading"
+<img *ngIf="source.Image" alt="162x120" [src]="source.Image | getFirstImage" class="publication-image" [hidden]="loading"
   (load)="onLoad()" />

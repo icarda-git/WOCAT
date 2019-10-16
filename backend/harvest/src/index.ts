@@ -23,7 +23,7 @@ if (cluster.isMaster) {
             let job = new plugins[repo.type](repo)
             job.init();
             let timeout: any = null;
-            job.fetchQueue.on('global:drained', () => {
+            job.indexQueue.on('global:drained', () => {
                 if (timeout) {
                     clearTimeout(timeout);
                 }
@@ -33,7 +33,7 @@ if (cluster.isMaster) {
                 }, 60000);
             });
         })
-        const numCPUs = require('os').cpus().length;
+        const numCPUs = 1;
         // Create a worker for each CPU
         for (let i = 0; i < numCPUs; i++) {
             cluster.fork();

@@ -1,15 +1,15 @@
 const selectMapColors = {
-  hover: '#427730',
+  hover: '#5f594f',
   select: {
-    color: '#427730',
+    color: '#5f594f',
     borderColor: '#000000'
   }
 };
 
 const axisColorForMap = {
-  minColor: '#acf992',
-  midColor: '#5c7753',
-  maxColor: '#427730'
+  minColor: '#f6decb',
+  midColor: '#dc7d35',
+  maxColor: '#d8640c'
 };
 
 const legendTextColorForPie = '#000000';
@@ -31,7 +31,7 @@ const LegendNavigationColors = {
  * charts, starts from the highest value
  */
 const chartValuesColors: string[] = [
-  '#427730',
+  '#5f594f',
   '#009673',
   '#0065bd',
   '#e1d219',

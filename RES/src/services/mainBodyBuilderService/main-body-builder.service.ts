@@ -146,13 +146,13 @@ export class MainBodyBuilderService extends BuilderUtilities {
     }
     // bitstreams needed for the images
     // handle needed for the altmetric
-    rows.push('thumbnail', 'handle', 'bitstreams');
+    rows.push('thumbnail', 'handle', 'bitstreams','Image');
     return rows;
   }
 
   private sortHitsQuery(b: bodybuilder.Bodybuilder, from: number): void {
     const { sort, value } = this.hitsAttributes;
-    b.sort(value ? value : 'date', {
+    b.sort(value ? value : '_id', {
       mode: 'max',
       order: sort ? sort : 'desc'
     }).from(from);

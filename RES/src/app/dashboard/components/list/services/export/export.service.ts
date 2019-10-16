@@ -43,7 +43,7 @@ export class ExportService {
   downloadFile(excelData: Array<Array<string>>, fileName: string): void {
     const sheet = utils.aoa_to_sheet([this.getHeader(), ...excelData]);
     const workBook = utils.book_new();
-    utils.book_append_sheet(workBook, sheet, 'Publications');
+    utils.book_append_sheet(workBook, sheet, 'Technologys');
     writeFile(workBook, fileName, { bookType: 'xlsx' });
   }
 

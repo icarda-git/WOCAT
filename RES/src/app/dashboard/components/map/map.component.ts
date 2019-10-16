@@ -80,7 +80,7 @@ export class MapComponent extends ParentChart implements OnInit {
           enableMouseTracking: true,
           allowPointSelect: true,
           tooltip: {
-            pointFormat: '{point.name}: <b>{point.value} Publications</b><br/>',
+            pointFormat: '{point.name}: <b>{point.value} Technologys</b><br/>',
             headerFormat: undefined
           },
           animation: {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  endPoint: 'http://dev.ares.codeobia.com/api/items/item/_search',
+  endPoint: 'http://localhost:9200/items-temp/item/_search',
   exportPoint: 'http://localhost:3000/exports'
 };
 

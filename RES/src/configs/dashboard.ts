@@ -64,8 +64,8 @@ export const dashboardConfig: GeneralConfigs[] = [
     component: 'PieComponent',
     componentConfigs: {
       id: 'pie',
-      title: 'Info Products by Type',
-      source: 'type',
+      title: 'Main purpose(s) of the Technology (land user’s perspective)',
+      source: 'Main purpose(s) of the Technology (land user’s perspective)',
       description: `
           All the available information products are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
@@ -78,17 +78,17 @@ export const dashboardConfig: GeneralConfigs[] = [
     tour: true
   },
   {
-    class: 'col-md-6 no-side-padding',
     show: true,
-    component: 'WordcloudComponent',
+    class: 'col-md-6 no-side-padding',
+    component: 'PieComponent',
     componentConfigs: {
-      id: 'wordcloud',
-      title: 'Info Products by Subject',
-      source: 'subject',
+      id: 'pie2',
+      title: 'Land use rights',
+      source: 'Land use rights',
       description: `
-          Top Subjects tags for all the information products are represented here, the greater the word,
-          the higher the number of information. Products tagged to that specific Subject. Click on ICONS:view_headline
-          to export this graphic, click on ICONS:expand_less to collapse it.
+          All the available information products are represented here and disaggregated by Type.
+          You can toggle on/off individual type of visualization in the list at the right side of
+          the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
     } as ComponentDashboardConfigs,
     scroll: {
@@ -102,7 +102,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     component: 'MapComponent',
     componentConfigs: {
       id: 'map',
-      source: 'country',
+      source: 'Country',
       title: 'Info Products Overview',
       description: `
           Geographic tags for all the information products found are represented here and disaggregated by
@@ -125,7 +125,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'mapTop',
       title: 'Top Countries',
-      source: 'country',
+      source: 'Country',
       description: `
           The top Countries by number of information products.
           Click on ICONS:expand_less to collapse the list.
@@ -136,36 +136,36 @@ export const dashboardConfig: GeneralConfigs[] = [
     },
     tour: true
   },
-  {
-    show: true,
-    class: 'col-md-12 mt-3 no-side-padding',
-    component: 'BarComponent',
-    componentConfigs: {
-      id: 'column',
-      source: ['type', 'year.keyword'],
-      title: 'Info Products Analytics',
-      chartType: 'column',
-      description: `
-            All Information Products are represented here and can be further disaggregated by two variables at the same time
-            choosing from “Type", "Year", "Author", "CRP" and "Funder". The "Year" pre-selects the five most recent years. The
-            other filters automatically pre-select those options that have the most results, helping you to access your
-            information faster. Click on ICONS:view_headline to export
-            this graphic, click on ICONS:expand_less to collapse it.
-      `
-    } as ComponentDashboardConfigs,
-    scroll: {
-      icon: 'bar_chart'
-    },
-    tour: true
-  },
+  // {
+  //   show: true,
+  //   class: 'col-md-12 mt-3 no-side-padding',
+  //   component: 'BarComponent',
+  //   componentConfigs: {
+  //     id: 'column',
+  //     source: ['type', 'year.keyword'],
+  //     title: 'Info Products Analytics',
+  //     chartType: 'column',
+  //     description: `
+  //           All Information Products are represented here and can be further disaggregated by two variables at the same time
+  //           choosing from “Type", "Year", "Author", "CRP" and "Funder". The "Year" pre-selects the five most recent years. The
+  //           other filters automatically pre-select those options that have the most results, helping you to access your
+  //           information faster. Click on ICONS:view_headline to export
+  //           this graphic, click on ICONS:expand_less to collapse it.
+  //     `
+  //   } as ComponentDashboardConfigs,
+  //   scroll: {
+  //     icon: 'bar_chart'
+  //   },
+  //   tour: true
+  // },
   {
     class: 'col-md-6 mt-3 no-side-padding',
     show: true,
     component: 'ListComponent',
     componentConfigs: {
       id: 'topLists',
-      title: 'Top Contributors',
-      source: 'author',
+      title: 'SLM groups',
+      source: 'SLM group',
       description: `
           The top twenty Authors by number of information products.
           Click on ICONS:expand_less to collapse the list.
@@ -182,8 +182,8 @@ export const dashboardConfig: GeneralConfigs[] = [
     component: 'ListComponent',
     componentConfigs: {
       id: 'topAffiliations',
-      title: 'Top Affiliations',
-      source: 'affiliation',
+      title: 'SLM measures',
+      source: 'SLM measures',
       description: `
           Top twenty affiliations by number of information products.
           Click on ICONS:expand_less to collapse the list.
@@ -200,8 +200,8 @@ export const dashboardConfig: GeneralConfigs[] = [
     component: 'ListComponent',
     componentConfigs: {
       id: 'CRP',
-      title: 'CRPs and Platforms',
-      source: 'crp',
+      title: 'Degradation type',
+      source: 'Degradation type',
       description: `
           All CRPs and platforms tagged across all information products
           are represented here and ordered by quantity of tags for
@@ -220,8 +220,8 @@ export const dashboardConfig: GeneralConfigs[] = [
     component: 'ListComponent',
     componentConfigs: {
       id: 'funders',
-      title: 'Funders',
-      source: 'sponsorship',
+      title: 'Institutions',
+      source: 'Name of institution',
       description: `
           All funders tagged across all information products are represented here and
           orderd by quantity of tags for each funder. Scroll down to see more results.
@@ -246,39 +246,19 @@ export const dashboardConfig: GeneralConfigs[] = [
           Click on ICONS:expand_less to collapse the list.
       `,
       content: {
-        title: 'title',
+        title: 'Name',
         icon: 'repo',
-        identifierUri: 'uri',
-        altmetric: true,
-        description: 'citation',
+        identifierUri: '_id',
+        altmetric: false,
+        description: 'Description',
         tags: {
-          Publisher: 'publisher',
-          Subject: 'subject',
-          Type: 'type',
-          Status: 'status',
-          'Date issued': 'date',
-          'Reporting CRP(s) and Platform(s)': 'crp',
-          'Attention Score': 'altmetric',
-          numbers: 'numbers'
+          Author: 'Author',
+          'Institution': 'Name of institution',
+
         },
         filterOptions: [
-          { display: 'Date', value: 'date', sort: 'desc' },
-          { display: 'Type', value: 'type.keyword', sort: 'desc' },
-          {
-            display: 'Authors',
-            value: 'citation.keyword',
-            sort: 'desc'
-          },
-          {
-            display: 'Altmetric: Attention Score',
-            value: 'altmetric.score',
-            sort: 'desc'
-          },
-          {
-            display: 'Views & Downloads',
-            value: 'numbers.score',
-            sort: 'desc'
-          }
+          { display: 'id', value: 'id', sort: 'desc' }
+          
         ]
       }
     } as ComponentDashboardConfigs,

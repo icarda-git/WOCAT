@@ -15,61 +15,52 @@ export const filtersConfig: GeneralConfigs[] = [
         more filters below, click on ICONS:loop to clear your query.`,
     } as ComponentLabelConfigs,
   },
-  {
-    show: true,
-    component: 'SearchComponent',
-    componentConfigs: {
-      placeholder: 'Search for Title, Author, etc',
-      type: searchOptions.allSearch,
-    } as ComponentSearchConfigs,
-  },
+  // {
+  //   show: true,
+  //   component: 'SearchComponent',
+  //   componentConfigs: {
+  //     placeholder: 'Search for Title, Author, etc',
+  //     type: searchOptions.allSearch,
+  //   } as ComponentSearchConfigs,
+  // },
   {
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select author(s)',
-      source: 'author.keyword',
+      placeholder: 'Activity(ies)',
+      source: 'Activity.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
-  {
-    show: true,
-    component: 'LabelComponent',
-    componentConfigs: {
-      text: 'Year(s)',
-    } as ComponentLabelConfigs,
-  },
-  {
-    show: true,
-    component: 'RangeComponent',
-    componentConfigs: {
-      source: 'year.keyword',
-      addInMainQuery: false,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SearchComponent',
-    componentConfigs: {
-      placeholder: 'Title',
-      type: searchOptions.titleSearch,
-    } as ComponentSearchConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      placeholder: 'Select region(s)',
-      source: 'region.keyword',
-      addInMainQuery: false,
-    } as ComponentFilterConfigs,
-  },
+  // {
+  //   show: true,
+  //   component: 'LabelComponent',
+  //   componentConfigs: {
+  //     text: 'Year(s)',
+  //   } as ComponentLabelConfigs,
+  // },
+  // {
+  //   show: true,
+  //   component: 'RangeComponent',
+  //   componentConfigs: {
+  //     source: 'year.keyword',
+  //     addInMainQuery: false,
+  //   } as ComponentFilterConfigs,
+  // },
+  // {
+  //   show: true,
+  //   component: 'SearchComponent',
+  //   componentConfigs: {
+  //     placeholder: 'Title',
+  //     type: searchOptions.titleSearch,
+  //   } as ComponentSearchConfigs,
+  // },
   {
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select country(ies)',
-      source: 'country.keyword',
+      placeholder: 'Location(s)',
+      source: 'Location.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -77,8 +68,8 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select subject(s)',
-      source: 'subject.keyword',
+      placeholder: 'Select Country(ies)',
+      source: 'Country.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -86,8 +77,8 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select language(s)',
-      source: 'language.keyword',
+      placeholder: 'Lastname / surname',
+      source: 'Lastname / surname.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -95,8 +86,17 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select Status',
-      source: 'status.keyword',
+      placeholder: 'Select SLM group',
+      source: 'SLM group.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Select SLM measures',
+      source: 'SLM measures.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -109,20 +109,20 @@ export const filtersConfig: GeneralConfigs[] = [
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
-  {
-    show: true,
-    component: 'LabelComponent',
-    componentConfigs: {
-      text: 'Affiliation and Donors',
-      border: true,
-    } as ComponentLabelConfigs,
-  },
+  // {
+  //   show: true,
+  //   component: 'LabelComponent',
+  //   componentConfigs: {
+  //     text: 'Affiliation and Donors',
+  //     border: true,
+  //   } as ComponentLabelConfigs,
+  // },
   {
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select CRP(s) and Platforms',
-      source: 'crp.keyword',
+      placeholder: 'Select Slopes on average',
+      source: 'Slopes on average.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -130,8 +130,8 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select author(s) affiliation(s)',
-      source: 'affiliation.keyword',
+      placeholder: 'Select Landforms',
+      source: 'Landforms.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -139,44 +139,44 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'select Funder(s)',
-      source: 'sponsorship.keyword',
+      placeholder: 'select Degradation type',
+      source: 'Degradation type.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
-  {
-    show: true,
-    component: 'LabelComponent',
-    componentConfigs: {
-      text: 'Sources',
-      border: true,
-      description: `
-        Select specific repositories to look up, leave it blank to
-        loop up in all available repositories. Select specific
-        CGSpace communities and MELSpace collecions to look up,
-        leave it blank to look up in all available communities
-        and collections.
-      `,
-    } as ComponentLabelConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      expandPosition: 'top',
-      placeholder: 'Select repository(ies)',
-      source: 'repo.keyword',
-      addInMainQuery: false,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      expandPosition: 'top',
-      placeholder: 'Select Community(ies)',
-      source: 'community.keyword',
-      addInMainQuery: false,
-    } as ComponentFilterConfigs,
-  },
+  // {
+  //   show: true,
+  //   component: 'LabelComponent',
+  //   componentConfigs: {
+  //     text: 'Sources',
+  //     border: true,
+  //     description: `
+  //       Select specific repositories to look up, leave it blank to
+  //       loop up in all available repositories. Select specific
+  //       CGSpace communities and MELSpace collecions to look up,
+  //       leave it blank to look up in all available communities
+  //       and collections.
+  //     `,
+  //   } as ComponentLabelConfigs,
+  // },
+  // {
+  //   show: true,
+  //   component: 'SelectComponent',
+  //   componentConfigs: {
+  //     expandPosition: 'top',
+  //     placeholder: 'Select repository(ies)',
+  //     source: 'repo.keyword',
+  //     addInMainQuery: false,
+  //   } as ComponentFilterConfigs,
+  // },
+  // {
+  //   show: true,
+  //   component: 'SelectComponent',
+  //   componentConfigs: {
+  //     expandPosition: 'top',
+  //     placeholder: 'Select Community(ies)',
+  //     source: 'community.keyword',
+  //     addInMainQuery: false,
+  //   } as ComponentFilterConfigs,
+  // },
 ];

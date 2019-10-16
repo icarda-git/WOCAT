@@ -1,9 +1,6 @@
 
 import { Client } from 'elasticsearch';
 import * as config from '../../config/index.json'
-import { addOns } from './plugins/';
-import { AddOn } from './plugins/Dspace/addOn/AddOn';
-import { fixLanguage, removeGlobal, removeSponsorship } from './plugins/Dspace/';
 
 function cnf() {
     return { host: config.elasticsearch.host, requestTimeout: 100000 };
@@ -116,11 +113,6 @@ export async function reindex() {
         }).then(d => console.log("create done "))
 
         console.log("Index All Done ");
-        runAddOn();
-        Promise.all([fixLanguage(), removeGlobal(), removeSponsorship()]).then((d) => {
-            console.dir(d)
-        }).catch(e => console.dir(e));
-
 
     } catch (e) {
         if (e.body.failures)
@@ -129,17 +121,4 @@ export async function reindex() {
             console.dir(e);
     }
 
-}
-
-export function runAddOn() {
-
-    var Que = new AddOn();
-    Que.clean().then(d => {
-        var activeAddOns = config.AddOns.filter(d => d.active == true)
-        activeAddOns.forEach((addOn) => {
-            var addOnObj = new addOns[addOn.name]();
-            Que.process(addOnObj.jobName, addOnObj.index);
-            addOn.param ? addOnObj.init(addOn.param) : addOnObj.init();
-        })
-    });
 }

@@ -22,39 +22,9 @@ export const countersConfig: GeneralConfigs[] = [
   {
     show: true,
     componentConfigs: {
-      id: 'openAccess',
-      title: 'Open Access',
-      source: 'status.keyword',
-      filter: 'Open Access',
-      description: `
-        Total number of information products freely
-        accessible and usable as by license applied.
-      `,
-      percentageFromTotal: true,
-    } as ComponentCounterConfigs,
-    tour: true,
-  },
-  {
-    show: true,
-    componentConfigs: {
-      id: 'limitedAcess',
-      title: 'Limited Access',
-      source: 'status.keyword',
-      filter: 'Limited Access',
-      description: `
-        Total number of information products only
-        accesible as by publisher's specifications.
-      `,
-      percentageFromTotal: true,
-    } as ComponentCounterConfigs,
-    tour: true,
-  },
-  {
-    show: true,
-    componentConfigs: {
-      id: 'languages',
-      title: 'Languages',
-      source: 'language.keyword',
+      id: 'Iinstitutions',
+      title: 'Iinstitutions',
+      source: 'Name of institution.keyword',
       description: `
         Total number of information products only accessible
         as by publisher's specifications.
@@ -65,9 +35,9 @@ export const countersConfig: GeneralConfigs[] = [
   {
     show: true,
     componentConfigs: {
-      id: 'authors',
-      title: 'Authors',
-      source: 'author.keyword',
+      id: 'Activity',
+      title: 'Activities',
+      source: 'Activity.keyword',
       description: `
         Total number of Authors involved with he information
         product found
@@ -78,12 +48,12 @@ export const countersConfig: GeneralConfigs[] = [
   {
     show: true,
     componentConfigs: {
-      id: 'authorsAffiliations',
-      title: 'Authors Affiliations',
-      source: 'affiliation.keyword',
+      id: 'Location',
+      title: 'Locations',
+      source: 'Location.keyword',
       description: `
         Total number of information products only accessible
-        as by Subject's specifications.
+        as by Locations specifications.
       `,
     } as ComponentCounterConfigs,
     tour: true,
@@ -92,10 +62,10 @@ export const countersConfig: GeneralConfigs[] = [
     show: true,
     componentConfigs: {
       id: 'CRPs&Platforms',
-      title: 'CRPs & Platforms',
-      source: 'crp.keyword',
+      title: 'pepole involved',
+      source: 'Lastname / surname.keyword',
       description: `
-        Total number of Authors involved with he information
+        Total number of pepole involved with he information
         product found
       `,
     } as ComponentCounterConfigs,
@@ -104,14 +74,14 @@ export const countersConfig: GeneralConfigs[] = [
   {
     show: true,
     componentConfigs: {
-      id: 'countries',
+      id: 'Countries',
       title: 'Countries',
-      source: 'country.keyword',
+      source: 'Country.keyword',
       description: `
         Total number of information products only accessible
         as by rights specifications.
       `,
     } as ComponentCounterConfigs,
     tour: true,
-  },
+  }
 ];

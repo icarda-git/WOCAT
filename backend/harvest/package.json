@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install_and_run": "npm i && ts-node src/index.ts > logs.logs",
+    "install_and_run": "npm i && ts-node src/index.ts",
     "start": "ts-node src/index.ts",
     "dev": "./node_modules/nodemon/bin/nodemon.js",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -10,20 +10,26 @@ export class Dspace extends common {
         super(repo);
     }
     init() {
-            console.log("init " + this.repo.name);
-            if (this.repo.startPage)
-                this.startPage = this.repo.startPage
-            if (this.repo.allCores)
-                this.pipe = require('os').cpus().length * 2;
-            this.repeatJobs.getDelayed().then(async (jobs) => {
-                if (jobs.length == 0) {
-                    if (config.startOnFirstInit)
-                        this.addJobs();
-                    this.repeatJobs.add(this.repeatName, {}, { repeat: { cron: config.cron } }).then(() => {
-                        console.log(this.repeatName);
-                    }).catch(e => console.log(e));
-                }
-            })
+        this.clean().then(() => {
+        this.fetchQueue.add(this.fetchJobTitle, { url:this.url }, { attempts: this.attempts })
+        });
+        // this.repeatJobs.add(this.repeatName, {}, { repeat: { cron: config.cron } }).then(() => {
+        //     console.log(this.repeatName);
+        // }).catch(e => console.log(e));
+        // console.log("init " + this.repo.name);
+        // if (this.repo.startPage)
+        //     this.startPage = this.repo.startPage
+        // if (this.repo.allCores)
+        //     this.pipe = require('os').cpus().length * 2;
+        // this.repeatJobs.getDelayed().then(async (jobs) => {
+        //     if (jobs.length == 0) {
+        //         if (config.startOnFirstInit)
+        //             this.addJobs();
+        //         this.repeatJobs.add(this.repeatName, {}, { repeat: { cron: config.cron } }).then(() => {
+        //             console.log(this.repeatName);
+        //         }).catch(e => console.log(e));
+        //     }
+        // })
     }
     addJobs() {
         this.clean().then(() => {
