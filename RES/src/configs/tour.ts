@@ -13,7 +13,7 @@ export const tourConfig: GeneralConfigs[] = [
     component: 'WelcomeComponent',
     componentConfigs: {
       id: 'welcome',
-      description: 'Welcome to AReS - Agricultural Research e-Seeker',
+      description: 'Welcome to Wocat - Agricultural Research e-Seeker',
       title: 'Greetings'
     } as Tour,
     tour: true
