@@ -22,8 +22,8 @@ export const countersConfig: GeneralConfigs[] = [
   {
     show: true,
     componentConfigs: {
-      id: 'Iinstitutions',
-      title: 'Iinstitutions',
+      id: 'Institutions',
+      title: 'Institutions',
       source: 'Name of institution.keyword',
       description: `
         Total number of information products only accessible
@@ -62,10 +62,10 @@ export const countersConfig: GeneralConfigs[] = [
     show: true,
     componentConfigs: {
       id: 'CRPs&Platforms',
-      title: 'pepole involved',
+      title: 'people involved',
       source: 'Lastname / surname.keyword',
       description: `
-        Total number of pepole involved with he information
+        Total number of people involved with he information
         product found
       `,
     } as ComponentCounterConfigs,
