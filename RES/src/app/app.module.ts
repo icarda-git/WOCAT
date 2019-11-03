@@ -70,7 +70,10 @@ import { SimiCircleComponent } from './dashboard/components/simi-circle/simi-cir
 import { BarComponent } from './dashboard/components/bar/bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ExportComponent } from './dashboard/components/list/export/export.component';
-
+import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsComponent } from './dashboard/components/google-maps/google-maps.component';
+import { NgSplitPipeModule } from 'angular-pipes';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,12 +106,16 @@ import { ExportComponent } from './dashboard/components/list/export/export.compo
     LineComponent,
     SimiCircleComponent,
     BarComponent,
-    ExportComponent
+    ExportComponent,
+    GoogleMapsComponent
   ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleKey
+    }),
     FormsModule,
     NgSelectModule,
     PortalModule,
@@ -143,7 +150,9 @@ import { ExportComponent } from './dashboard/components/list/export/export.compo
     LayoutModule,
     MatMenuModule,
     MatDialogModule,
-    MatDividerModule
+    MatDividerModule,
+    NgSplitPipeModule,
+    AgmSnazzyInfoWindowModule
   ],
   entryComponents: [
     ChartComponent,
@@ -161,7 +170,8 @@ import { ExportComponent } from './dashboard/components/list/export/export.compo
     LineComponent,
     SimiCircleComponent,
     BarComponent,
-    ExportComponent
+    ExportComponent,
+    GoogleMapsComponent
   ],
   bootstrap: [AppComponent]
 })

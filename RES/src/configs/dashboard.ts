@@ -98,7 +98,7 @@ export const dashboardConfig: GeneralConfigs[] = [
   },
   {
     show: true,
-    class: 'col-md-9 mt-3 no-side-padding',
+    class: 'col-md-6 mt-3 no-side-padding',
     component: 'MapComponent',
     componentConfigs: {
       id: 'map',
@@ -119,16 +119,20 @@ export const dashboardConfig: GeneralConfigs[] = [
     tour: true
   },
   {
-    class: 'col-md-3 mt-3 no-side-padding shorter',
     show: true,
-    component: 'ListComponent',
+    class: 'col-md-6 mt-3 no-side-padding',
+    component: 'GoogleMapsComponent',
     componentConfigs: {
-      id: 'mapTop',
-      title: 'Top Countries',
-      source: 'Country',
+      id: 'google-map',
+      source: 'map_points',
+      title: 'Info Products Overview',
       description: `
-          The top Countries by number of information products.
-          Click on ICONS:expand_less to collapse the list.
+          Geographic tags for all the information products found are represented here and disaggregated by
+          country. The darker the color the higher the number of information products tagged to that specific
+          country. Overall, the graphic shows the world areas targeted by research activities that produced
+          information products. Click on ICONS:view_headline
+          to export this graphic, click on ICONS:expand_less
+          to collapse it.
       `
     } as ComponentDashboardConfigs,
     scroll: {
@@ -136,6 +140,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     },
     tour: true
   },
+
   // {
   //   show: true,
   //   class: 'col-md-12 mt-3 no-side-padding',
@@ -258,7 +263,7 @@ export const dashboardConfig: GeneralConfigs[] = [
         },
         filterOptions: [
           { display: 'id', value: 'id', sort: 'desc' }
-          
+
         ]
       }
     } as ComponentDashboardConfigs,

@@ -74,7 +74,7 @@ export class common implements Harvester {
                         data.results.forEach((element: any) => {
                             this.indexQueue.add(this.indexJobTitle, { data: element })
                         });
-                          this.fetchQueue.add(this.fetchJobTitle, { url: data.next }, { attempts: this.attempts })
+                        this.fetchQueue.add(this.fetchJobTitle, { url: data.next }, { attempts: this.attempts })
                         job.progress(100);
                         done();
                     }
@@ -93,7 +93,7 @@ export class common implements Harvester {
     index = (job: any, done: any) => {
         job.progress(20);
 
-    
+
         let finaldata: Array<any> = [];
 
         request({
@@ -106,7 +106,7 @@ export class common implements Harvester {
             if (!error) {
                 if (response.statusCode == 200) {
                     let data: any = JSON.parse(body)
-                    let formated = this.format(data);
+                    let formated = this.format(data, job.data.data.code);
                     finaldata.push({ index: { _index: config.temp_index, _type: config.index_type, _id: job.data.data.code } });
                     finaldata.push(formated);
                     this.esClient.bulk({
@@ -156,9 +156,10 @@ export class common implements Harvester {
         // });
     }
 
-    format(jsonData: any) {
+    format(jsonData: any, code:any) {
 
         let finalObj: any = {}
+        finalObj['id'] = code;
         this.traverse(jsonData, (obj: any, key: any, val: any) => {
             if (key == "value" && val && val[0] && val[0]) {
                 if (val[0].key && val[0].values) {
@@ -179,6 +180,16 @@ export class common implements Harvester {
                     });
                 }
             }
+
+            if (key == "location_map") {
+
+                finalObj['map_points'] = [];
+                if (val.value[0] && val.value[0].value)
+                    JSON.parse(val.value[0].value).features.forEach((element: any) => {
+                        finalObj['map_points'].push(element.geometry.coordinates[0] + ',' + element.geometry.coordinates[1] + ',' + finalObj.id + ',' + finalObj.Name.replace(",", ""))
+                    });
+            }
+
 
 
         })
