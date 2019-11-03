@@ -2,9 +2,6 @@
 <a target="_blank" [href]="'https://qcat.wocat.net/en/wocat/technologies/view/'+source.id+'/'">
   <img *ngIf="!source.Image" alt="162x120" class="publication-image" src="assets/no-thumbnail-available.jpg"
     [hidden]="loading" (load)="onLoad()" />
-
-
-
   <img *ngIf="source.Image" alt="162x120" [src]="source.Image | getFirstImage" class="publication-image"
     [hidden]="loading" (load)="onLoad()" />
 </a>
