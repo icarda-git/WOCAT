@@ -9,20 +9,25 @@ const mapWorld = require('@highcharts/map-collection/custom/world-robinson-highr
 import * as Highcharts from 'highcharts';
 import { axisColorForMap, selectMapColors } from 'src/configs/chartColors';
 import { ParentChart } from '../parent-chart';
-import { Bucket } from 'src/app/filters/services/interfaces';
+import { Bucket, QueryFilterAttribute } from 'src/app/filters/services/interfaces';
 import { getCountryCode } from '../services/countryList.helper';
-
+import { SelectService } from 'src/app/filters/services/select/select.service';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../../../../store';
+import { ComponentFilterConfigs, ComponentDashboardConfigs } from 'src/configs/generalConfig.interface';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [ChartMathodsService],
+  providers: [ChartMathodsService, SelectService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapComponent extends ParentChart implements OnInit {
   constructor(
     cms: ChartMathodsService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private readonly selectService: SelectService,
+    private readonly store: Store<fromStore.AppState>
   ) {
     super(cms);
   }
@@ -35,6 +40,26 @@ export class MapComponent extends ParentChart implements OnInit {
       }
       this.cdr.detectChanges();
     });
+  }
+  Query(name: any) {
+    const { source } = this.componentConfigs as ComponentFilterConfigs;
+    const query: bodybuilder.Bodybuilder = this.selectService.addAttributeToMainQuery(
+      {
+        [source+'.keyword']: [name]
+      } as QueryFilterAttribute
+    );
+     this.store.dispatch(new fromStore.SetQuery(query.build()));
+     this.selectService.resetNotification();
+    //return name;
+  }
+  setQ() {
+    var _self = this;
+    return function (e: any) {
+
+      _self.Query(this.name)
+
+    }
+
   }
 
   private setOptions(buckets: Array<Bucket>): Highcharts.Options {
@@ -65,6 +90,15 @@ export class MapComponent extends ParentChart implements OnInit {
           [0.67, axisColorForMap.midColor],
           [1, axisColorForMap.maxColor]
         ]
+      },
+      plotOptions: {
+        series: {
+          point: {
+            events: {
+              click: this.setQ(),
+            }
+          }
+        }
       },
       series: [
         {

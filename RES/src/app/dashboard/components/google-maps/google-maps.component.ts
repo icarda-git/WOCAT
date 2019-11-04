@@ -32,7 +32,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   paginationAtt: PageEvent;
   fitBounds: boolean = false;
   @ViewChild(AgmMap) mapElement: any
-
+  timeout: any = [];
   // google maps zoom level
   zoom: number = 2;
   // initial center position for the map
@@ -63,20 +63,17 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
       // for each iteration console.log a word
       // and make a pause after it
       ((i) => {
-        setTimeout(() => {
+        this.timeout.push(setTimeout(() => {
           for (var z = 0; z < markers[i].length; z++) {
             this.listData.push(markers[i][z]);
           }
           if (i == markers.length - 1)
             this.scrollHelperService.loading = false;
-        }, 500 * i);
+        }, 500 * i));
       })(i);
     };
   }
 
-  centerChange(e) {
-    console.log(e);
-  }
   ngOnInit(): void {
     this.scrollHelperService.storeVal = this.store;
     this.seeIfThisCompInView();
@@ -108,10 +105,14 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   }
 
   private subToDataFromStore(): void {
+    
     const { source } = this.componentConfigs as ComponentDashboardConfigs;
     this.store
       .select(fromStore.getBuckets, source)
       .subscribe((b: Bucket[]) => {
+        this.timeout.forEach(element => {
+          clearTimeout(element);
+        });
         //  if (b.length <= 50) {
         this.zoom = 8
         this.fitBounds = true;

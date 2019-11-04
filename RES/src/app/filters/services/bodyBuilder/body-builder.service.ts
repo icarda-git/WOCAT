@@ -125,4 +125,26 @@ export class BodyBuilderService {
   ): bodybuilder.Bodybuilder {
     return this.mainBodyBuilderService.addQueryAttributes(q);
   }
+
+  getFiltersFromQuery(query) {
+    let finalObj = []
+    this.traverse(query, (obj: any, key: any, val: any) => {
+
+      if (key == 'term' && val instanceof Object) {
+        finalObj.push(val)
+      }
+
+    });
+
+    return finalObj;
+  }
+
+  async traverse(o: any, fn: (obj: any, prop: string, value: any) => void) {
+    for (const i in o) {
+      fn.apply(this, [o, i, o[i]]);
+      if (o[i] !== null && typeof (o[i]) === 'object') {
+        this.traverse(o[i], fn);
+      }
+    }
+  }
 }

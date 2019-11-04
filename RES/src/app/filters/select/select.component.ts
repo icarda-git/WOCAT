@@ -18,12 +18,13 @@ import { SelectService } from '../services/select/select.service';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../store';
 import { ParentComponent } from 'src/app/parent-component.class';
+import { BodyBuilderService } from '../services/bodyBuilder/body-builder.service';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
-  providers: [SelectService]
+  providers: [SelectService, BodyBuilderService]
 })
 export class SelectComponent extends ParentComponent implements OnInit {
   filterOptions: Bucket[];
@@ -38,7 +39,8 @@ export class SelectComponent extends ParentComponent implements OnInit {
 
   constructor(
     private readonly selectService: SelectService,
-    private readonly store: Store<fromStore.AppState>
+    private readonly store: Store<fromStore.AppState>,
+    private readonly bodyBuilderService: BodyBuilderService,
   ) {
     super();
     this.filterOptions = [];
@@ -56,6 +58,9 @@ export class SelectComponent extends ParentComponent implements OnInit {
     this.subtoDataStream();
     this.subtoTermStream();
     this.shouldReset();
+
+
+    this.subtoToQuery(source)
   }
 
   getDataOnOpen(): void {
@@ -93,7 +98,14 @@ export class SelectComponent extends ParentComponent implements OnInit {
   }
 
   onChange(selectedOptions: Bucket[]): void {
+
     const { source } = this.componentConfigs as ComponentFilterConfigs;
+    console.log(
+      {
+        [source]: selectedOptions.map((b: Bucket) => b.key)
+      } as QueryFilterAttribute
+    )
+
     const query: bodybuilder.Bodybuilder = this.selectService.addAttributeToMainQuery(
       {
         [source]: selectedOptions.map((b: Bucket) => b.key)
@@ -102,6 +114,8 @@ export class SelectComponent extends ParentComponent implements OnInit {
     this.store.dispatch(new fromStore.SetQuery(query.build()));
     this.selectService.resetNotification();
   }
+
+
 
   onRemove(option: Bucket): void {
     this.getDataAndToggle();
@@ -113,6 +127,21 @@ export class SelectComponent extends ParentComponent implements OnInit {
     }
     this.doNotChange = true;
     this.getData(this.buildQuery());
+  }
+  private subtoToQuery(source): void {
+    this.store.select(fromStore.getQuery).subscribe((query) => {
+      let filters = this.bodyBuilderService.getFiltersFromQuery(query);
+      filters.forEach((element) => {
+        for (var key in element)
+          if (key == source)
+            this.selectedOptions.push({ key: element[key], doc_count: 1 })
+      });
+
+      // if (filters.length > 0)
+      //  console.log(Object.keys(filters[0])[0]) 
+
+      //console.log(query.query);
+    });
   }
 
   private subtoTermStream(): void {

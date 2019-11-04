@@ -16,7 +16,6 @@ export class LineComponent extends ParentChart implements OnInit {
 
   ngOnInit(): void {
     this.init('line');
-    this.buildOptions.subscribe(data => console.log(data));
   }
 
   private setOptions(): any {
