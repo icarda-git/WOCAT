@@ -28,7 +28,7 @@ import { BodyBuilderService } from '../services/bodyBuilder/body-builder.service
 })
 export class SelectComponent extends ParentComponent implements OnInit {
   filterOptions: Bucket[];
-  selectedOptions: Bucket[];
+  selectedOptions: Bucket[] = [];
   searchTerms$: Subject<string>;
   private size: number;
   private doNotChange: boolean;
@@ -47,7 +47,7 @@ export class SelectComponent extends ParentComponent implements OnInit {
     this.searchTerms$ = new Subject();
     this.size = 10;
     this.doNotChange = false;
-    this.selectedOptions = [];
+    this.selectedOptions ;
     this.opened = false;
   }
 
@@ -86,6 +86,7 @@ export class SelectComponent extends ParentComponent implements OnInit {
       this.doNotChange = false;
       this.getDataAndToggle();
     }
+   
   }
 
   /**
@@ -98,14 +99,7 @@ export class SelectComponent extends ParentComponent implements OnInit {
   }
 
   onChange(selectedOptions: Bucket[]): void {
-
     const { source } = this.componentConfigs as ComponentFilterConfigs;
-    console.log(
-      {
-        [source]: selectedOptions.map((b: Bucket) => b.key)
-      } as QueryFilterAttribute
-    )
-
     const query: bodybuilder.Bodybuilder = this.selectService.addAttributeToMainQuery(
       {
         [source]: selectedOptions.map((b: Bucket) => b.key)
@@ -130,17 +124,13 @@ export class SelectComponent extends ParentComponent implements OnInit {
   }
   private subtoToQuery(source): void {
     this.store.select(fromStore.getQuery).subscribe((query) => {
-      let filters = this.bodyBuilderService.getFiltersFromQuery(query);
-      filters.forEach((element) => {
-        for (var key in element)
-          if (key == source)
-            this.selectedOptions.push({ key: element[key], doc_count: 1 })
-      });
-
-      // if (filters.length > 0)
-      //  console.log(Object.keys(filters[0])[0]) 
-
-      //console.log(query.query);
+        let filters = this.bodyBuilderService.getFiltersFromQuery(query);
+        filters.forEach((element) => {
+          for (var key in element)
+            if (key == source) {
+              this.selectedOptions = [...this.selectedOptions.filter(d => d.key != element[key]),...[{ key: element[key], doc_count: 1 }]]
+            }
+        });
     });
   }
 
