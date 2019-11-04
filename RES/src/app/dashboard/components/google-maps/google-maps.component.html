@@ -16,7 +16,7 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
   <ng-container>
-    <agm-map [zoom]="zoom" [fitBounds]="fitBounds" mapTypeId="hybrid" [disableDefaultUI]="false" [zoomControl]="false">
+    <agm-map [zoom]="zoom" [zoomControl]="true" [fitBounds]="fitBounds" mapTypeId="hybrid" [disableDefaultUI]="false" [zoomControl]="false">
       <!-- <ng-template *ngFor="let m of listData"> -->
       <!-- *ngIf="m.key | split:','; let aVariable" -->
       <ng-container *ngFor="let m of listData">
