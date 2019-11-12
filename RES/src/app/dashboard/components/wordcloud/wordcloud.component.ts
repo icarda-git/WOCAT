@@ -8,7 +8,10 @@ import * as Highcharts from 'highcharts';
 import { ChartMathodsService } from '../services/chartCommonMethods/chart-mathods.service';
 import { ParentChart } from '../parent-chart';
 import { Bucket } from 'src/app/filters/services/interfaces';
+import { SelectService } from 'src/app/filters/services/select/select.service';
 
+import * as fromStore from '../../../../store';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-wordcloud',
   templateUrl: './wordcloud.component.html',
@@ -19,9 +22,11 @@ import { Bucket } from 'src/app/filters/services/interfaces';
 export class WordcloudComponent extends ParentChart implements OnInit {
   constructor(
     cms: ChartMathodsService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+     public readonly selectService: SelectService,
+     public readonly store: Store<fromStore.AppState>,
   ) {
-    super(cms);
+    super(cms,selectService,store);
   }
 
   ngOnInit(): void {

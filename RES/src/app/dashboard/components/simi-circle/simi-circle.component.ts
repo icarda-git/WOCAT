@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ChartMathodsService } from '../services/chartCommonMethods/chart-mathods.service';
 import * as Highcharts from 'highcharts';
 import { ParentChart } from '../parent-chart';
-
+import * as fromStore from '../../../../store';
+import { Store } from '@ngrx/store';
+import { SelectService } from 'src/app/filters/services/select/select.service';
 @Component({
   selector: 'app-simi-circle',
   templateUrl: './simi-circle.component.html',
@@ -10,8 +12,11 @@ import { ParentChart } from '../parent-chart';
   providers: [ChartMathodsService],
 })
 export class SimiCircleComponent extends ParentChart implements OnInit {
-  constructor(cms: ChartMathodsService) {
-    super(cms);
+  constructor(cms: ChartMathodsService,
+    public readonly selectService: SelectService,
+    public readonly store: Store<fromStore.AppState>,
+  ) {
+    super(cms, selectService, store);
   }
 
   ngOnInit(): void {

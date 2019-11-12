@@ -32,6 +32,24 @@ export const filtersConfig: GeneralConfigs[] = [
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Land use rights(s)',
+      source: 'Land use rights.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Main purpose(s)',
+      source: 'Main purpose(s) of the Technology (land user’s perspective).keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
   // {
   //   show: true,
   //   component: 'LabelComponent',

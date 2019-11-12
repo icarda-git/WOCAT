@@ -1,19 +1,42 @@
 import { EventEmitter } from '@angular/core';
 import {
   ComponentDashboardConfigs,
-  MergedSelect
+  MergedSelect,
+  ComponentFilterConfigs
 } from 'src/configs/generalConfig.interface';
 import { ChartMathodsService } from './services/chartCommonMethods/chart-mathods.service';
-import { Bucket } from 'src/app/filters/services/interfaces';
+import { Bucket, QueryFilterAttribute } from 'src/app/filters/services/interfaces';
 import { ParentComponent } from 'src/app/parent-component.class';
-
+import { SelectService } from 'src/app/filters/services/select/select.service';
+import * as fromStore from '../../../store';
+import { Store } from '@ngrx/store';
 export class ParentChart extends ParentComponent {
   chartOptions: Highcharts.Options;
   protected buildOptions: EventEmitter<Array<Bucket> | MergedSelect>;
-  constructor(public readonly cms: ChartMathodsService) {
+  constructor(public readonly cms: ChartMathodsService,
+    public readonly selectService: SelectService,
+    public readonly store: Store<fromStore.AppState>
+  ) {
     super();
     this.buildOptions = new EventEmitter<Array<Bucket>>();
     this.chartOptions = {};
+  }
+
+  Query(name: any) {
+ 
+    const { source } = this.componentConfigs as ComponentFilterConfigs;
+    const query: bodybuilder.Bodybuilder = this.selectService.addNewValueAttributetoMainQuery(source,name);
+    this.store.dispatch(new fromStore.SetQuery(query.build()));
+    this.selectService.resetNotification();
+  }
+  setQ() {
+    var _self = this;
+    return function (e: any) {
+
+      _self.Query(this.name)
+
+    }
+
   }
 
   protected init(type: string, cb?: () => any) {

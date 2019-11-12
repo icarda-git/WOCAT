@@ -17,12 +17,13 @@ import * as fromStore from '../../../../store';
 import { BarService } from './services/bar/bar.service';
 import { UpdateCallerBarChart } from '../list/paginated-list/filter-paginated-list/types.interface';
 import { map } from 'rxjs/operators';
+import { SelectService } from 'src/app/filters/services/select/select.service';
 
 @Component({
   selector: 'app-bar',
   templateUrl: './bar.component.html',
   styleUrls: ['./bar.component.scss'],
-  providers: [ChartMathodsService, RangeService, BarService],
+  providers: [ChartMathodsService, RangeService, BarService,SelectService,Store],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarComponent extends ParentChart implements OnInit {
@@ -31,11 +32,12 @@ export class BarComponent extends ParentChart implements OnInit {
   constructor(
     cms: ChartMathodsService,
     private readonly rangeService: RangeService,
-    private readonly store: Store<fromStore.AppState>,
     public readonly barService: BarService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    public readonly selectService: SelectService,
+    readonly store: Store<fromStore.AppState>
   ) {
-    super(cms);
+    super(cms, selectService, store);
     this.rangeService.storeVal = this.store;
   }
 

@@ -38,7 +38,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   // initial center position for the map
   @ViewChild('clickToEnable') clickToEnable: ElementRef;
   constructor(
-    private readonly store: Store<fromStore.AppState>,
+    public readonly store: Store<fromStore.AppState>,
     public readonly scrollHelperService: ScrollHelperService,
     private readonly cdr: ChangeDetectorRef
   ) {

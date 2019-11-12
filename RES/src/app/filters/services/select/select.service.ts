@@ -11,6 +11,7 @@ import {
   ResetOptions,
 } from '../interfaces';
 import { BodyBuilderService } from '../bodyBuilder/body-builder.service';
+import { keys } from 'highcharts';
 
 @Injectable()
 export class SelectService {
@@ -59,7 +60,18 @@ export class SelectService {
     };
     return this.bodyBuilderService.buildquery(bq);
   }
-
+  // to add new value to same surce 
+  addNewValueAttributetoMainQuery(source: string, value) {
+    const filteredArray = this.bodyBuilderService.getFiltersFromQuery().filter(element => Object.keys(element).indexOf(source + '.keyword') != -1)
+    //console.log(filteredArray)
+    let filterdValues: Array<any> = [value]
+    filterdValues = [...filterdValues,...filteredArray.map(element => Object.values(element)[0])]
+    filterdValues.filter((v, i, a) => a.indexOf(v) === i); 
+   
+    return this.addAttributeToMainQuery({
+      [source + '.keyword']: filterdValues.length ? filterdValues : []
+    } as QueryFilterAttribute);
+  }
   addAttributeToMainQuery(
     keyVal: QueryFilterAttribute
   ): bodybuilder.Bodybuilder {

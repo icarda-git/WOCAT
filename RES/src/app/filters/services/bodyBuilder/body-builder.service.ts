@@ -126,7 +126,8 @@ export class BodyBuilderService {
     return this.mainBodyBuilderService.addQueryAttributes(q);
   }
 
-  getFiltersFromQuery(query) {
+  getFiltersFromQuery() {
+    const query = this.buildMainQuery().build();
     let finalObj = []
     this.traverse(query, (obj: any, key: any, val: any) => {
 

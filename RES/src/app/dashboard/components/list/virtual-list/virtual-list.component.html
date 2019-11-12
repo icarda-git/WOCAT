@@ -5,13 +5,10 @@
           * I just choose ~randomly ~20 to divide on
          -->
 <mat-list>
-  <cdk-virtual-scroll-viewport
-    [itemSize]="
+  <cdk-virtual-scroll-viewport [itemSize]="
       listData?.length > 50 ? listData?.length / 20 : listData?.length
-    "
-    class="viewport w-100"
-  >
-    <div *cdkVirtualFor="let item of listData" class="item">
+    " class="viewport w-100">
+    <div *cdkVirtualFor="let item of listData" (click)="clickOnKey(item.key)" class="item listHover">
       <mat-list-item class="p-1">
         <ng-container *ngIf="!isSmall">
           <span class="lists_counts">
@@ -20,7 +17,7 @@
           <i class="arrow right arrow-warning"></i>
         </ng-container>
 
-        <div class="w-100">
+        <div  class="w-100">
           {{ item.key }}
           <small *ngIf="isSmall">
             ( {{ ((item.doc_count / totalItems) * 100).toFixed(2) }}% )
@@ -30,11 +27,8 @@
             {{ item.doc_count }}
           </small>
           <div class="progress">
-            <div
-              class="progress-bar bg-primary progress-bar-striped"
-              role="progressbar"
-              [ngStyle]="{ width: (item.doc_count / totalItems) * 100 + '%' }"
-            ></div>
+            <div class="progress-bar bg-primary progress-bar-striped" role="progressbar"
+              [ngStyle]="{ width: (item.doc_count / totalItems) * 100 + '%' }"></div>
           </div>
         </div>
       </mat-list-item>

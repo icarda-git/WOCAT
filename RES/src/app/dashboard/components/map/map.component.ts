@@ -26,10 +26,10 @@ export class MapComponent extends ParentChart implements OnInit {
   constructor(
     cms: ChartMathodsService,
     private readonly cdr: ChangeDetectorRef,
-    private readonly selectService: SelectService,
-    private readonly store: Store<fromStore.AppState>
+    public readonly selectService: SelectService,
+    public readonly store: Store<fromStore.AppState>,
   ) {
-    super(cms);
+    super(cms, selectService, store);
   }
 
   ngOnInit(): void {
@@ -41,26 +41,7 @@ export class MapComponent extends ParentChart implements OnInit {
       this.cdr.detectChanges();
     });
   }
-  Query(name: any) {
-    const { source } = this.componentConfigs as ComponentFilterConfigs;
-    const query: bodybuilder.Bodybuilder = this.selectService.addAttributeToMainQuery(
-      {
-        [source+'.keyword']: [name]
-      } as QueryFilterAttribute
-    );
-     this.store.dispatch(new fromStore.SetQuery(query.build()));
-     this.selectService.resetNotification();
-    //return name;
-  }
-  setQ() {
-    var _self = this;
-    return function (e: any) {
 
-      _self.Query(this.name)
-
-    }
-
-  }
 
   private setOptions(buckets: Array<Bucket>): Highcharts.Options {
     return {
