@@ -93,7 +93,7 @@ export class BuilderUtilities {
     );
     // I'm assuming  that this will always will have 'status'
     mainQuerySources.forEach((key: string) =>
-      key.includes('status')
+      key.includes('slm_type')
         ? arr.push(
             {
               source: `${key}.keyword`,

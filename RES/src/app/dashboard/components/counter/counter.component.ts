@@ -60,8 +60,11 @@ export class CounterComponent implements OnInit {
           filter,
         })
         .pipe(
-          map((ag: AggregationsValue) =>
-            ag ? ag.value || ag.doc_count : undefined
+          map((ag: AggregationsValue) => {
+            console.log(ag)
+            return ag ? ag.value || ag.doc_count : undefined
+          }
+
           )
         )
         .subscribe((n: number) => this.initCounterLogic(n));

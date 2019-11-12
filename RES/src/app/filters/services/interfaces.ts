@@ -84,6 +84,7 @@ export interface ESSource {
   year: string;
   repo: string;
   numbers: Numbers;
+  slm_type?: Array<string>;
   country?: Array<string>;
   subject?: Array<string>;
 }

@@ -27,6 +27,15 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
+      placeholder: 'SLM Type)',
+      source: 'slm_type.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
       placeholder: 'Activity(ies)',
       source: 'Activity.keyword',
       addInMainQuery: true,
@@ -79,6 +88,15 @@ export const filtersConfig: GeneralConfigs[] = [
     componentConfigs: {
       placeholder: 'Location(s)',
       source: 'Location.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Select Region(s)',
+      source: 'regions.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },

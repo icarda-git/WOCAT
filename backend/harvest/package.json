@@ -16,6 +16,7 @@
     "@types/underscore": "^1.8.13",
     "bull": "^3.7.0",
     "cluster": "^0.7.7",
+    "country-data": "0.0.31",
     "elasticsearch": "^15.4.1",
     "iso-3166-1": "^1.1.0",
     "iso-639-1": "^2.0.3",

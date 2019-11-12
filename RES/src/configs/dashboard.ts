@@ -259,6 +259,7 @@ export const dashboardConfig: GeneralConfigs[] = [
         tags: {
           Author: 'Author',
           'Institution': 'Name of institution',
+          'SLM Type': 'slm_type'
 
         },
         filterOptions: [

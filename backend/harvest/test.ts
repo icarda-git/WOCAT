@@ -1,32 +1,16 @@
-import jsonData from './data.json'
+var regions = require('country-data').regions;
+var lookup = require('country-data').lookup;
+// Match a value (grab first from array)
+
 
 class test {
     init() {
-        let finalObj: any = {}
-        this.traverse(jsonData, (obj: any, key: any, val: any) => {
-            if (key == "value" && val && val[0] && val[0]) {
-                if (val[0].key && val[0].values) {
-                    finalObj[val[0].key] = val[0].values
-                }
-                if (Array.isArray(val)) {
-                    val.forEach(element => {
-                        if (element.key && element.value) {
-                            if (finalObj[element.key] && !Array.isArray(finalObj[element.key]))
-                                finalObj[element.key] = [finalObj[element.key]]
-                            if (Array.isArray(finalObj[element.key])) {
-                                if (finalObj[element.key].indexOf(element.value) === -1 && element.value)
-                                    finalObj[element.key].push(element.value)
-                            }else
-                                finalObj[element.key] = element.value
-                        }
+         var france = lookup.countries({ name: 'Jordan' })[0].alpha2
+        console.log(france)
+         console.log(Object.values(regions).filter((regions:any) => regions.countries.indexOf(france)  >=0)[0]);
 
-                    });
-                }
-            }
+       // 
 
-
-        })
-        console.log(finalObj);
     }
     traverse(o: any, fn: (obj: any, prop: string, value: any) => void) {
         for (const i in o) {

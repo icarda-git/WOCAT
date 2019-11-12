@@ -12,7 +12,8 @@ import Bull from 'bull'
 import * as _ from 'underscore'
 const ISO = require('iso-3166-1')
 const langISO = require('iso-639-1')
-let moment = require('moment')
+var regions = require('country-data').regions;
+var lookup = require('country-data').lookup;
 export class common implements Harvester {
     repo: any
     url = ""
@@ -43,7 +44,7 @@ export class common implements Harvester {
         this.repeatJobs = new Bull(this.repo.name + '_repeat', { redis: config.redis });
 
         this.esClient = new Client(this.conf());
-        this.url = this.repo.itemsEndPoint + '?type=technologies';
+        this.url = this.repo.itemsEndPoint;
     }
 
     conf() {
@@ -156,10 +157,15 @@ export class common implements Harvester {
         // });
     }
 
-    format(jsonData: any, code:any) {
+    format(jsonData: any, code: string) {
 
         let finalObj: any = {}
         finalObj['id'] = code;
+        if (code.split('_')[0] == "unccd")
+            return;
+            
+        finalObj['slm_type'] = code.split('_')[0]
+
         this.traverse(jsonData, (obj: any, key: any, val: any) => {
             if (key == "value" && val && val[0] && val[0]) {
                 if (val[0].key && val[0].values) {
@@ -189,9 +195,26 @@ export class common implements Harvester {
                         finalObj['map_points'].push(element.geometry.coordinates[0] + ',' + element.geometry.coordinates[1] + ',' + finalObj.id + ',' + finalObj.Name.replace(",", ""))
                     });
             }
+            if (key == 'qg_location') {
+                finalObj['Country'] = [];
+                finalObj['regions'] = [];
+
+                val.children.country.value.forEach((element: any) => {
+                    finalObj['Country'].push(element.value);
+                });
+                let countries = finalObj['Country'].filter((element: any) => finalObj['Country'].indexOf(element) != -1)
+                countries.forEach((country: string) => {
+                    let result = lookup.countries({ name: country })[0];
+                    if (result && result.alpha2) {
+                        let region: any = Object.values(regions).filter((regions: any) => regions.countries.indexOf(result.alpha2) >= 0)[0]
+                        finalObj['regions'].push(region.name)
+                    } else
+                        console.log(country)
+
+                });
 
 
-
+            }
         })
         return finalObj;
     }
