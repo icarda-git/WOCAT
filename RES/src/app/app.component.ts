@@ -25,9 +25,13 @@ import { ScreenSizeService } from 'src/services/screenSize/screen-size.service';
 })
 export class AppComponent implements OnInit {
   @ViewChild('drawer') sidenav: MatDrawer;
+  @ViewChild('tooltip') matTooltip;
+
   loading$: Observable<boolean>;
   render: boolean;
+  matdisabled: boolean = false;
   orOperator: boolean;
+  filterText = '< filters';
   readonly orAndToolTip: string;
   private prevenetMouseOnNav: boolean;
   options: any = {
@@ -54,15 +58,33 @@ export class AppComponent implements OnInit {
       top: 0,
     };
   }
-
+  ngAfterViewInit(){
+    this.startTour();
+  }
   ngOnInit(): void {
+   
+    setInterval(() => {
+      if (this.filterText == '<---- Filters')
+        this.filterText = '<-  - Filters';
+      else
+        this.filterText = '<---- Filters';
+
+    }, 500)
+    setTimeout(() => {
+      this.matTooltip.show();
+    }, 1000);
+
+
     this.loading$ = this.store.select(fromStore.getLoadingStatus);
   }
 
   onMouseMove(event: MouseEvent): void {
+
     if (!this.prevenetMouseOnNav) {
-      if (event.x === 0 && !this.sidenav.opened) {
+      if (event.x <= 20 && !this.sidenav.opened) {
         this.openAndRender('over');
+        this.matTooltip.hide();
+        this.matdisabled = true;
       }
       if (event.x > this.sidenav._width && this.sidenav.opened) {
         this.sidenav.close();
@@ -72,6 +94,7 @@ export class AppComponent implements OnInit {
 
   openNavAndDisableIgnoreMouseEvent(): void {
     this.openAndRender('side');
+
     this.prevenetMouseOnNav = true;
     this.sidenav.closedStart.subscribe(() => (this.prevenetMouseOnNav = false));
   }

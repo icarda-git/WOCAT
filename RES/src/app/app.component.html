@@ -2,27 +2,14 @@
   <mat-toolbar color="primary" class="toolbar-style">
     <mat-toolbar-row>
       <img src="assets/wocat_logo.svg" alt="Wocat logo" class="nab-bar-images" />
-      <button
-        mat-icon-button
-        aria-label="refresh page button"
-        class="end"
-        (click)="openNavAndDisableIgnoreMouseEvent()"
-      >
-        <mat-icon>search</mat-icon>
+      <button mat-icon-button aria-label="refresh page button" class="end"
+        (click)="openNavAndDisableIgnoreMouseEvent()">
+        <mat-icon>filter_list_alt</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        (click)="refresh()"
-        aria-label="refresh page button"
-      >
+      <button mat-icon-button (click)="refresh()" aria-label="refresh page button">
         <mat-icon>loop</mat-icon>
       </button>
-      <button
-        *ngIf="!isSmall"
-        mat-icon-button
-        (click)="startTour()"
-        aria-label="refresh page button"
-      >
+      <button *ngIf="!isSmall" mat-icon-button (click)="startTour()" aria-label="refresh page button">
         <mat-icon>contact_support</mat-icon>
       </button>
     </mat-toolbar-row>
@@ -31,29 +18,16 @@
 
 <tour-step-template></tour-step-template>
 
-<mat-sidenav-container
-  (document:mousemove)="onMouseMove($event)"
-  [hasBackdrop]="false"
-  class="mb-0 pb-0 main-container"
-  fullscreen
->
-  <mat-sidenav
-    #drawer
-    [mode]="isSmall ? 'over' : 'over'"
-    [fixedInViewport]="options.fixed"
-    [fixedTopGap]="options.top"
-    [fixedBottomGap]="options.bottom"
-    [autoFocus]="false"
-    id="drawer"
-  >
+<mat-sidenav-container (document:mousemove)="onMouseMove($event)" [hasBackdrop]="false" class="mb-0 pb-0 main-container"
+  fullscreen>
+
+  <mat-sidenav #tooltip="matTooltip" [matTooltip]="filterText" [matTooltipDisabled]="matdisabled" matTooltipPosition="before" #drawer [mode]="isSmall ? 'over' : 'over'"
+    [fixedInViewport]="options.fixed" [fixedTopGap]="options.top" [fixedBottomGap]="options.bottom" [autoFocus]="false"
+    id="drawer">
+
     <mat-nav-list *ngIf="render" class="m-2">
-      <button
-        mat-button
-        mat-raised-button
-        (click)="addRemoveOrOperator()"
-        color="primary"
-        class="w-100"
-      >
+
+      <button mat-button mat-raised-button (click)="addRemoveOrOperator()" color="primary" class="w-100">
         Boolean Operator
         <ng-container *ngIf="orOperator; else and">
           <strong>OR</strong>
@@ -61,28 +35,15 @@
         <ng-template #and>
           <strong>AND</strong>
         </ng-template>
-        <mat-icon
-          aria-label="Button that displays a tooltip when focused or hovered over"
-          [mdePopoverTriggerFor]="appPopover"
-          mdePopoverTriggerOn="hover"
-        >
+        <mat-icon aria-label="Button that displays a tooltip when focused or hovered over"
+          [mdePopoverTriggerFor]="appPopover" mdePopoverTriggerOn="hover">
           error
         </mat-icon>
-        <mde-popover
-          #appPopover="mdePopover"
-          [mdePopoverOverlapTrigger]="false"
-        >
+        <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
           <app-icons-with-text [text]="orAndToolTip"></app-icons-with-text>
         </mde-popover>
       </button>
-      <button
-        *ngIf="isSmall"
-        color="warn"
-        mat-button
-        mat-raised-button
-        class="w-100 mt-2"
-        (click)="sidenav.close()"
-      >
+      <button *ngIf="isSmall" color="warn" mat-button mat-raised-button class="w-100 mt-2" (click)="sidenav.close()">
         Close
       </button>
       <app-filters></app-filters>

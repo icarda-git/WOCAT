@@ -36,8 +36,35 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
+      placeholder: 'Water use rights(s)',
+      source: 'Water use rights.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Land ownership',
+      source: 'Land ownership.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
       placeholder: 'Land use rights(s)',
       source: 'Land use rights.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Institution(s)',
+      source: 'Name of institution.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },

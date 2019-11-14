@@ -35,7 +35,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   fitBounds: boolean = false;
   refreshMap = true;
   myStyles = {
-    height: '230px'
+    height: '430px'
   }
   @ViewChild(AgmMap) mapElement: any
   timeout: any = [];
