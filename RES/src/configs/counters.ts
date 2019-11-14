@@ -93,7 +93,7 @@ export const countersConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'CRPs&Platforms',
       title: 'people involved',
-      source: 'Lastname / surname.keyword',
+      source: 'SLM specialist.keyword',
       description: `
         Total number of people involved with he information
         product found

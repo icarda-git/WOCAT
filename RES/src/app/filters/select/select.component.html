@@ -1,4 +1,6 @@
 <ng-select
+  [matTooltip]="componentConfigs.helpText"
+  matTooltipPosition="right"
   [items]="filterOptions"
   bindLabel="key"
   (open)="getDataOnOpen()"

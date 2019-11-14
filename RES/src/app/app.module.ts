@@ -24,7 +24,8 @@ import {
   MatProgressSpinnerModule,
   MatMenuModule,
   MatDialogModule,
-  MatDividerModule
+  MatDividerModule,
+  MatTooltipModule
 } from '@angular/material';
 import { FiltersComponent } from './filters/filters.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -152,7 +153,8 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     MatDialogModule,
     MatDividerModule,
     NgSplitPipeModule,
-    AgmSnazzyInfoWindowModule
+    AgmSnazzyInfoWindowModule,
+    MatTooltipModule
   ],
   entryComponents: [
     ChartComponent,

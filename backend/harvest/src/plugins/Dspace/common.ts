@@ -75,7 +75,7 @@ export class common implements Harvester {
                         data.results.forEach((element: any) => {
                             this.indexQueue.add(this.indexJobTitle, { data: element })
                         });
-                        this.fetchQueue.add(this.fetchJobTitle, { url: data.next }, { attempts: this.attempts })
+                        //  this.fetchQueue.add(this.fetchJobTitle, { url: data.next }, { attempts: this.attempts })
                         job.progress(100);
                         done();
                     }
@@ -163,14 +163,15 @@ export class common implements Harvester {
         finalObj['id'] = code;
         if (code.split('_')[0] == "unccd")
             return;
-            
-        finalObj['slm_type'] = code.split('_')[0]
 
+        finalObj['slm_type'] = code.split('_')[0]
         this.traverse(jsonData, (obj: any, key: any, val: any) => {
-            if (key == "value" && val && val[0] && val[0]) {
+            if (key == "value" && val && val[0] && obj.label && obj.label != 'Select category(ies) / code(s)') {
                 if (val[0].key && val[0].values) {
                     finalObj[val[0].key] = val[0].values
                 }
+
+
                 if (Array.isArray(val)) {
                     val.forEach(element => {
                         if (element.key && element.value) {
@@ -187,6 +188,25 @@ export class common implements Harvester {
                 }
             }
 
+            if (key == "value" && val && val[0] && obj.label && obj.label == 'Select category(ies) / code(s)') {
+                if (val[0].key && val[0].values && !finalObj['clean_' + val[0].key]) {
+                    finalObj['clean_' + val[0].key] = val[0].values
+                }
+                else if (val[0].key && val[0].values && finalObj['clean_' + val[0].key])
+                    finalObj['clean_' + val[0].key] = [...finalObj['clean_' + val[0].key], ...val[0].values]
+
+            }
+
+            if (key == "user_id" && val && val.value) {
+
+                finalObj['SLM specialist'] = []
+                val.value.forEach((element: any) => {
+                    if (element.value)
+                        finalObj['SLM specialist'].push(element.value)
+                });
+
+
+            }
             if (key == "location_map") {
 
                 finalObj['map_points'] = [];
@@ -216,6 +236,8 @@ export class common implements Harvester {
 
             }
         })
+        if (finalObj['slm_type'] != 'approaches' && finalObj['First name(s)'] && finalObj['Lastname / surname'])
+            finalObj['SLM specialist'].push(finalObj['First name(s)'] + finalObj['Lastname / surname'])
         return finalObj;
     }
 

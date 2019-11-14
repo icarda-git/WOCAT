@@ -82,6 +82,26 @@ export const dashboardConfig: GeneralConfigs[] = [
     class: 'col-md-6 no-side-padding',
     component: 'PieComponent',
     componentConfigs: {
+      id: 'pie1',
+      title: 'Land ownership',
+      source: 'Land ownership',
+      description: `
+          All the available information products are represented here and disaggregated by Type.
+          You can toggle on/off individual type of visualization in the list at the right side of
+          the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
+      `
+    } as ComponentDashboardConfigs,
+    scroll: {
+      linkedWith: 'pie'
+    },
+    tour: true
+  },
+  
+  {
+    show: true,
+    class: 'col-md-6 no-side-padding',
+    component: 'PieComponent',
+    componentConfigs: {
       id: 'pie2',
       title: 'Land use rights',
       source: 'Land use rights',
@@ -92,7 +112,27 @@ export const dashboardConfig: GeneralConfigs[] = [
       `
     } as ComponentDashboardConfigs,
     scroll: {
-      linkedWith: 'pie'
+      icon: 'pie_chart'
+      
+    },
+    tour: true
+  },
+  {
+    show: true,
+    class: 'col-md-6 no-side-padding',
+    component: 'PieComponent',
+    componentConfigs: {
+      id: 'pie3',
+      title: 'Water use rights',
+      source: 'Water use rights',
+      description: `
+          All the available information products are represented here and disaggregated by Type.
+          You can toggle on/off individual type of visualization in the list at the right side of
+          the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
+      `
+    } as ComponentDashboardConfigs,
+    scroll: {
+      linkedWith: 'pie2'
     },
     tour: true
   },
@@ -188,7 +228,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'topAffiliations',
       title: 'SLM measures',
-      source: 'SLM measures',
+      source: 'clean_SLM measures',
       description: `
           Top twenty affiliations by number of information products.
           Click on ICONS:expand_less to collapse the list.
@@ -206,7 +246,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'CRP',
       title: 'Degradation type',
-      source: 'Degradation type',
+      source: 'clean_Degradation type',
       description: `
           All CRPs and platforms tagged across all information products
           are represented here and ordered by quantity of tags for

@@ -1,7 +1,18 @@
-<mat-expansion-panel [expanded]="scrollHelperService.expandedStatus" (afterCollapse)="disPatchSetInView(true)"
+<mat-expansion-panel [ngClass]="{fullscreen: isFullscreen}" [disabled]="isFullscreen"
+  [expanded]="scrollHelperService.expandedStatus" (afterCollapse)="disPatchSetInView(true)"
   (afterExpand)="disPatchSetInView(false)">
-  <div class="prevent-scroll" *ngIf="!isPaginatedList" (click)="hideClickToEnable()" #clickToEnable>
+  <div class="prevent-scroll" *ngIf="!isPaginatedList && !isFullscreen" (click)="hideClickToEnable()" #clickToEnable>
     <span>Click to enable</span>
+  </div>
+  <div class="panel-header-icons">
+    <mat-icon matTooltip="Full Screen"
+    matTooltipPosition="after" (click)="fullscren()" *ngIf="!isFullscreen">
+      fullscreen
+    </mat-icon>
+    <mat-icon matTooltip="Exit Full Screen"
+    matTooltipPosition="after" (click)="fullscren()" *ngIf="isFullscreen">
+      fullscreen_exit
+    </mat-icon>
   </div>
   <mat-expansion-panel-header class="border-bottom-muted">
     <mat-panel-title class="icon-with-text" *ngIf="scrollHelperService.getViewState?.userSeesMe">
@@ -10,31 +21,39 @@
             a tooltip when focused or hovered over" [mdePopoverTriggerFor]="appPopover" mdePopoverTriggerOn="hover">
         error
       </mat-icon>
+
+
       <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
         <app-icons-with-text [text]="componentConfigs.description"></app-icons-with-text>
       </mde-popover>
     </mat-panel-title>
   </mat-expansion-panel-header>
   <ng-container>
-    <agm-map [zoom]="zoom" [zoomControl]="true" [fitBounds]="fitBounds" mapTypeId="hybrid" [disableDefaultUI]="false" [zoomControl]="false">
-      <!-- <ng-template *ngFor="let m of listData"> -->
-      <!-- *ngIf="m.key | split:','; let aVariable" -->
-      <ng-container *ngFor="let m of listData">
-        <agm-marker *ngIf="m.key | split:','; let aVariable" [agmFitBounds]="fitBounds" [latitude]="aVariable[1]"
-          [longitude]="aVariable[0]">
-          <agm-snazzy-info-window [maxWidth]="500" [closeWhenOthersOpen]="true">
-            <ng-template>
-              <h3>{{aVariable[3]}}</h3>
-              <a target="_blank"
-                [href]="'https://qcat.wocat.net/en/wocat/technologies/view/'+aVariable[2]+'/'">View on Wocat website</a>
-            </ng-template>
-
-          </agm-snazzy-info-window>
-        </agm-marker>
-      </ng-container>
+    <div class="w-100 h-100" #panel>
 
 
-    </agm-map>
+      <agm-map *ngIf="refreshMap" [ngStyle]="myStyles" [zoom]="zoom" [zoomControl]="true" [fitBounds]="fitBounds"
+        mapTypeId="hybrid" [disableDefaultUI]="false" [zoomControl]="false">
+        <!-- <ng-template *ngFor="let m of listData"> -->
+        <!-- *ngIf="m.key | split:','; let aVariable" -->
+        <ng-container *ngFor="let m of listData">
+          <agm-marker *ngIf="m.key | split:','; let aVariable" [agmFitBounds]="fitBounds" [latitude]="aVariable[1]"
+            [longitude]="aVariable[0]">
+            <agm-snazzy-info-window [maxWidth]="500" [closeWhenOthersOpen]="true">
+              <ng-template>
+                <h3>{{aVariable[3]}}</h3>
+                <a target="_blank" [href]="'https://qcat.wocat.net/en/wocat/technologies/view/'+aVariable[2]+'/'">View
+                  on
+                  Wocat website</a>
+              </ng-template>
+
+            </agm-snazzy-info-window>
+          </agm-marker>
+        </ng-container>
+
+
+      </agm-map>
+    </div>
   </ng-container>
   <ngx-loading [show]="!loadingHits && scrollHelperService.loading"></ngx-loading>
 </mat-expansion-panel>

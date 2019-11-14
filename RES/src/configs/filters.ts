@@ -36,15 +36,6 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Activity(ies)',
-      source: 'Activity.keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
       placeholder: 'Land use rights(s)',
       source: 'Land use rights.keyword',
       addInMainQuery: true,
@@ -86,6 +77,7 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
+      helpText:'this is just a help text',
       placeholder: 'Location(s)',
       source: 'Location.keyword',
       addInMainQuery: true,
@@ -113,8 +105,8 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Lastname / surname',
-      source: 'Lastname / surname.keyword',
+      placeholder: 'SLM specialist',
+      source: 'SLM specialist.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -132,16 +124,7 @@ export const filtersConfig: GeneralConfigs[] = [
     component: 'SelectComponent',
     componentConfigs: {
       placeholder: 'Select SLM measures',
-      source: 'SLM measures.keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      placeholder: 'Select type(s)',
-      source: 'type.keyword',
+      source: 'clean_SLM measures.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -176,7 +159,7 @@ export const filtersConfig: GeneralConfigs[] = [
     component: 'SelectComponent',
     componentConfigs: {
       placeholder: 'select Degradation type',
-      source: 'Degradation type.keyword',
+      source: 'clean_Degradation type.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },

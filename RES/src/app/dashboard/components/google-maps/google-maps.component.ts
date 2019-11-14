@@ -10,6 +10,7 @@ import { Hits, Bucket, hits } from 'src/app/filters/services/interfaces';
 import { PageEvent } from '@angular/material';
 import { AgmMap } from '@agm/core';
 
+
 declare function _altmetric_embed_init(): any;
 interface marker {
   lat: number;
@@ -30,19 +31,43 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   listData: Bucket[] = []; // for aggrigiation list
   isPaginatedList: boolean; // determine if we should display the hits or not
   paginationAtt: PageEvent;
+  isFullscreen: boolean = false;
   fitBounds: boolean = false;
+  refreshMap = true;
+  myStyles = {
+    height: '230px'
+  }
   @ViewChild(AgmMap) mapElement: any
   timeout: any = [];
   // google maps zoom level
   zoom: number = 2;
   // initial center position for the map
   @ViewChild('clickToEnable') clickToEnable: ElementRef;
+  @ViewChild('panel') elementView: ElementRef;
   constructor(
     public readonly store: Store<fromStore.AppState>,
     public readonly scrollHelperService: ScrollHelperService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+
   ) {
     super();
+  }
+
+  fullscren() {
+    this.isFullscreen = !this.isFullscreen;
+    this.refreshMap = false;
+
+
+    setTimeout(() => {
+      this.myStyles.height = this.elementView.nativeElement.offsetHeight ? (this.elementView.nativeElement.offsetHeight - 65) + 'px' : '430px';
+      console.log(this.myStyles.height)
+      this.refreshMap = true;
+    }, 100);
+  }
+
+  ngAfterViewInit() {
+    //if (this.elementView)
+    console.log(this.elementView.nativeElement)
   }
 
 
@@ -75,6 +100,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.myStyles.height = this.elementView.nativeElement.offsetHeight.value;
     this.scrollHelperService.storeVal = this.store;
     this.seeIfThisCompInView();
     this.scrollHelperService.dataIsReadyArrived
@@ -105,7 +131,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   }
 
   private subToDataFromStore(): void {
-    
+
     const { source } = this.componentConfigs as ComponentDashboardConfigs;
     this.store
       .select(fromStore.getBuckets, source)
