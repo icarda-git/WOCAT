@@ -75,7 +75,7 @@ export class common implements Harvester {
                         data.results.forEach((element: any) => {
                             this.indexQueue.add(this.indexJobTitle, { data: element })
                         });
-                        //  this.fetchQueue.add(this.fetchJobTitle, { url: data.next }, { attempts: this.attempts })
+                        this.fetchQueue.add(this.fetchJobTitle, { url: data.next }, { attempts: this.attempts })
                         job.progress(100);
                         done();
                     }
@@ -134,27 +134,7 @@ export class common implements Harvester {
                 done(error)
 
         });
-        // finaldata.push({ index: { _index: config.temp_index, _type: config.index_type, _id: this.repo.name + "_" + formated.id } });
-        // finaldata.push(formated);
-        // this.esClient.bulk({
-        //     refresh: 'wait_for',
-        //     body: finaldata
-        // }, (err: Error, resp: any) => {
-        //     job.progress(90);
-        //     if (err)
-        //         done(err)
-        //     resp.items.forEach((item: any) => {
-        //         //item.index.status
-        //         if (item.index.status != 200 && item.index.status != 201) {
-        //             let error = new Error('error update or create item ' + item.index._id);
-        //             error.stack = JSON.stringify(item);
-        //             console.log(item)
-        //         }
-
-        //     })
-        //     job.progress(100);
-        //     done(null, resp.items)
-        // });
+       
     }
 
     format(jsonData: any, code: string) {
