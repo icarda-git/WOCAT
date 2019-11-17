@@ -14,6 +14,7 @@ const ISO = require('iso-3166-1')
 const langISO = require('iso-639-1')
 var regions = require('country-data').regions;
 var lookup = require('country-data').lookup;
+var moment = require('moment');
 export class common implements Harvester {
     repo: any
     url = ""
@@ -44,7 +45,7 @@ export class common implements Harvester {
         this.repeatJobs = new Bull(this.repo.name + '_repeat', { redis: config.redis });
 
         this.esClient = new Client(this.conf());
-        this.url = this.repo.itemsEndPoint;
+        this.url = this.repo.itemsEndPoint+'?type=[technologies,approaches]';
     }
 
     conf() {
@@ -134,7 +135,7 @@ export class common implements Harvester {
                 done(error)
 
         });
-       
+
     }
 
     format(jsonData: any, code: string) {
@@ -195,6 +196,12 @@ export class common implements Harvester {
                         finalObj['map_points'].push(element.geometry.coordinates[0] + ',' + element.geometry.coordinates[1] + ',' + finalObj.id + ',' + finalObj.Name.replace(",", ""))
                     });
             }
+            if (key == 'date_documentation') {
+                if (val.value && val.value[0] && val.value[0].value)
+                    if (moment(val.value[0].value).isValid())
+                        finalObj['date_documentation'] = moment(val.value[0].value).format("YYYY-MM-DD")
+            }
+
             if (key == 'qg_location') {
                 finalObj['Country'] = [];
                 finalObj['regions'] = [];

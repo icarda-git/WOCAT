@@ -73,8 +73,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ExportComponent } from './dashboard/components/list/export/export.component';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsComponent } from './dashboard/components/google-maps/google-maps.component';
-import { NgSplitPipeModule } from 'angular-pipes';
+import { NgSplitPipeModule, NgFirstOrDefaultPipeModule, NgHeadPipeModule, NgTruncatePipeModule } from 'angular-pipes';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { TruncateModule } from '@yellowspot/ng-truncate';
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,7 +155,9 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     MatDividerModule,
     NgSplitPipeModule,
     AgmSnazzyInfoWindowModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgHeadPipeModule,
+    TruncateModule,
   ],
   entryComponents: [
     ChartComponent,

@@ -11,7 +11,7 @@ export const countersConfig: GeneralConfigs[] = [
       title: 'Total Items',
       source: 'total',
       description: `
-        Total number of information product found
+        Total number of SLM Data found
       `,
     } as ComponentCounterConfigs,
     scroll: {
@@ -27,7 +27,7 @@ export const countersConfig: GeneralConfigs[] = [
       source: 'slm_type.keyword',
       filter: 'technologies',
       description: `
-        Total number of information products freely
+        Total number of SLM Data freely
         accessible and usable as by license applied.
       `,
       percentageFromTotal: true,
@@ -42,7 +42,7 @@ export const countersConfig: GeneralConfigs[] = [
       source: 'slm_type.keyword',
       filter: 'approaches',
       description: `
-        Total number of information products only
+        Total number of SLM Data only
         accesible as by publisher's specifications.
       `,
       percentageFromTotal: true,
@@ -56,21 +56,8 @@ export const countersConfig: GeneralConfigs[] = [
       title: 'Institutions',
       source: 'Name of institution.keyword',
       description: `
-        Total number of information products only accessible
+        Total number of SLM Data only accessible
         as by publisher's specifications.
-      `,
-    } as ComponentCounterConfigs,
-    tour: true,
-  },
-  {
-    show: true,
-    componentConfigs: {
-      id: 'Activity',
-      title: 'Activities',
-      source: 'Activity.keyword',
-      description: `
-        Total number of Authors involved with he information
-        product found
       `,
     } as ComponentCounterConfigs,
     tour: true,
@@ -82,7 +69,7 @@ export const countersConfig: GeneralConfigs[] = [
       title: 'Locations',
       source: 'Location.keyword',
       description: `
-        Total number of information products only accessible
+        Total number of SLM Data only accessible
         as by Locations specifications.
       `,
     } as ComponentCounterConfigs,
@@ -108,7 +95,7 @@ export const countersConfig: GeneralConfigs[] = [
       title: 'Countries',
       source: 'Country.keyword',
       description: `
-        Total number of information products only accessible
+        Total number of SLM Data only accessible
         as by rights specifications.
       `,
     } as ComponentCounterConfigs,

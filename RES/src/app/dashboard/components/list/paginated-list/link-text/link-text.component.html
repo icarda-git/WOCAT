@@ -10,7 +10,7 @@
     </strong>
   </a>
   <p *ngIf="source[content.description]">
-    {{ source[content.description] }}
+    {{ source[content.description] | words : 80 : "..." }}
   </p>
   <section class="publication-text">
     <ng-container *ngFor="let label of objectKeys(content.tags); let i = index">

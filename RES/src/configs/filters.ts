@@ -185,7 +185,7 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'select Degradation type',
+      placeholder: 'Select Degradation type',
       source: 'clean_Degradation type.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,

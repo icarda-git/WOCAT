@@ -67,7 +67,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Main purpose(s) of the Technology (land user’s perspective)',
       source: 'Main purpose(s) of the Technology (land user’s perspective)',
       description: `
-          All the available information products are represented here and disaggregated by Type.
+          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
@@ -86,7 +86,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Land ownership',
       source: 'Land ownership',
       description: `
-          All the available information products are represented here and disaggregated by Type.
+          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
@@ -96,7 +96,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     },
     tour: true
   },
-  
+
   {
     show: true,
     class: 'col-md-6 no-side-padding',
@@ -106,14 +106,14 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Land use rights',
       source: 'Land use rights',
       description: `
-          All the available information products are represented here and disaggregated by Type.
+          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
     } as ComponentDashboardConfigs,
     scroll: {
       icon: 'pie_chart'
-      
+
     },
     tour: true
   },
@@ -126,7 +126,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Water use rights',
       source: 'Water use rights',
       description: `
-          All the available information products are represented here and disaggregated by Type.
+          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
@@ -145,10 +145,10 @@ export const dashboardConfig: GeneralConfigs[] = [
       source: 'Country',
       title: 'Info Products Overview',
       description: `
-          Geographic tags for all the information products found are represented here and disaggregated by
-          country. The darker the color the higher the number of information products tagged to that specific
+          Geographic tags for all the SLM Data found are represented here and disaggregated by
+          country. The darker the color the higher the number of SLM Data tagged to that specific
           country. Overall, the graphic shows the world areas targeted by research activities that produced
-          information products. Click on ICONS:view_headline
+          SLM Data. Click on ICONS:view_headline
           to export this graphic, click on ICONS:expand_less
           to collapse it.
       `
@@ -167,10 +167,10 @@ export const dashboardConfig: GeneralConfigs[] = [
       source: 'map_points',
       title: 'Info Products Overview',
       description: `
-          Geographic tags for all the information products found are represented here and disaggregated by
-          country. The darker the color the higher the number of information products tagged to that specific
+          Geographic tags for all the SLM Data found are represented here and disaggregated by
+          country. The darker the color the higher the number of SLM Data tagged to that specific
           country. Overall, the graphic shows the world areas targeted by research activities that produced
-          information products. Click on ICONS:view_headline
+          SLM Data. Click on ICONS:view_headline
           to export this graphic, click on ICONS:expand_less
           to collapse it.
       `
@@ -181,28 +181,27 @@ export const dashboardConfig: GeneralConfigs[] = [
     tour: true
   },
 
-  // {
-  //   show: true,
-  //   class: 'col-md-12 mt-3 no-side-padding',
-  //   component: 'BarComponent',
-  //   componentConfigs: {
-  //     id: 'column',
-  //     source: ['type', 'year.keyword'],
-  //     title: 'Info Products Analytics',
-  //     chartType: 'column',
-  //     description: `
-  //           All Information Products are represented here and can be further disaggregated by two variables at the same time
-  //           choosing from “Type", "Year", "Author", "CRP" and "Funder". The "Year" pre-selects the five most recent years. The
-  //           other filters automatically pre-select those options that have the most results, helping you to access your
-  //           information faster. Click on ICONS:view_headline to export
-  //           this graphic, click on ICONS:expand_less to collapse it.
-  //     `
-  //   } as ComponentDashboardConfigs,
-  //   scroll: {
-  //     icon: 'bar_chart'
-  //   },
-  //   tour: true
-  // },
+  {
+    show: true,
+    class: 'col-md-12 mt-3 no-side-padding',
+    component: 'BarComponent',
+    componentConfigs: {
+      id: 'barchart',
+      source: ['Land use rights', 'SLM group.keyword'],
+      title: 'Info Products Analytics',
+      chartType: 'column',
+      description: `
+            All SLM Data are represented here and can be further disaggregated by two variables at the same time The
+            filters automatically pre-select those options that have the most results, helping you to access your
+            information faster. Click on ICONS:view_headline to export
+            this graphic, click on ICONS:expand_less to collapse it.
+      `
+    } as ComponentDashboardConfigs,
+    scroll: {
+      icon: 'bar_chart'
+    },
+    tour: true
+  },
   {
     class: 'col-md-6 mt-3 no-side-padding',
     show: true,
@@ -212,7 +211,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'SLM groups',
       source: 'SLM group',
       description: `
-          The top twenty Authors by number of information products.
+          The top twenty Authors by number of SLM Data.
           Click on ICONS:expand_less to collapse the list.
       `
     } as ComponentDashboardConfigs,
@@ -230,7 +229,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'SLM measures',
       source: 'clean_SLM measures',
       description: `
-          Top twenty affiliations by number of information products.
+          Top twenty affiliations by number of SLM Data.
           Click on ICONS:expand_less to collapse the list.
       `
     } as ComponentDashboardConfigs,
@@ -248,7 +247,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Degradation type',
       source: 'clean_Degradation type',
       description: `
-          All CRPs and platforms tagged across all information products
+          All CRPs and platforms tagged across all SLM Data
           are represented here and ordered by quantity of tags for
           each CRP or platform. Scroll down to see more results.
           Click on ICONS:expand_less to collapse the list.
@@ -268,7 +267,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Institutions',
       source: 'Name of institution',
       description: `
-          All funders tagged across all information products are represented here and
+          All funders tagged across all SLM Data are represented here and
           orderd by quantity of tags for each funder. Scroll down to see more results.
           Click on ICONS:expand_less to collapse the list.
       `
@@ -286,7 +285,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       id: 'paginatedList',
       title: 'Info Producs List of Results',
       description: `
-          All information products found are represented here, You can sort this list by "Date",
+          All SLM Data found are represented here, You can sort this list by "Date",
           "Type", "Authors", "Altmetric: Attention Score" and "Views & Downloads" info.
           Click on ICONS:expand_less to collapse the list.
       `,
@@ -303,7 +302,8 @@ export const dashboardConfig: GeneralConfigs[] = [
 
         },
         filterOptions: [
-          { display: 'id', value: 'id', sort: 'desc' }
+          { display: 'ID', value: 'id.keyword', sort: 'desc' },
+          { display: 'Compiled Date', value: 'date_documentation', sort: 'desc' }
 
         ]
       }

@@ -9,7 +9,7 @@
   (expanded)="cms.disPatchSetInView($event)"
   (chartInstance)="handleChartInstance($event)"
 >
-  <ng-container *ngIf="barService.buckets">
+  <ng-container *ngIf="barService.buckets && false">
     <div class="col-12">
       <ng-select
         [items]="barService.barTypes"

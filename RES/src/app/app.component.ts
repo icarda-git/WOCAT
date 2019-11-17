@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     };
   }
   ngAfterViewInit(){
-    this.startTour();
+    //this.startTour();
   }
   ngOnInit(): void {
    
