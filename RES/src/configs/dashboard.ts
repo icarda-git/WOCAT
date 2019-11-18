@@ -143,7 +143,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'map',
       source: 'Country',
-      title: 'Info Products Overview',
+      title: 'Nr. of case studies per country',
       description: `
           Geographic tags for all the SLM Data found are represented here and disaggregated by
           country. The darker the color the higher the number of SLM Data tagged to that specific
@@ -165,7 +165,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'google-map',
       source: 'map_points',
-      title: 'Info Products Overview',
+      title: 'Location of documented SLM',
       description: `
           Geographic tags for all the SLM Data found are represented here and disaggregated by
           country. The darker the color the higher the number of SLM Data tagged to that specific

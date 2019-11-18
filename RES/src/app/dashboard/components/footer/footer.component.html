@@ -1,20 +1,57 @@
 <footer class="container-fluid bg-white border-top-light mt-3">
   <div class="row">
-    <a href="http://codeobia.com/" target="_blank" class="col-md-3 col-xs-12 primary-hover border-left-light"
-      rel="noopener">
-      <img src="assets/codeobia-logo.png" alt="codeobia logo" class="codeobiaImg mx-auto d-block mt-1 m-3" />
-    </a>
+    <div class="col-md-12">
+      <ngx-flicking class="flicking flicking1" [plugins]="plugins"
+        [options]="{ gap: 50,bound: true, circular: true , moveType: { type: 'snap', count: 5 }}">
+        <ng-template>
+          <div class="panel">
+            <a href="https://qcat.wocat.net" target="_blank" class="primary-hover" rel="noopener">
+              <img style="background-color: #5f594f;" src="assets/wocat_logo.svg" alt="codeobia logo"
+                class="codeobiaImg mx-auto d-block mt-1 m-3" />
+            </a>
+          </div>
+          <div class="panel">
+            <a href="https://icarda.org" target="_blank" class="primary-hover" rel="noopener">
+              <img src="https://icarda.org/themes/custom/icarda/logo.svg" alt="codeobia logo"
+                class="codeobiaImg mx-auto d-block mt-1 m-3" />
+            </a>
+          </div>
+          <div class="panel">
+            <a href="https://mel.cgiar.org/" target="_blank" class="primary-hover" rel="noopener">
+              <img src="https://mel.cgiar.org/assets/frontend/logos/logo.png" alt="codeobia logo"
+                class="codeobiaImg mx-auto d-block mt-1 m-3" />
+            </a>
+          </div>
+          <div class="panel">
+            <a href="http://www.isric.org/" target="_blank" class="primary-hover" rel="noopener">
+              <img src="https://qcat.wocat.net/static/assets/img/supporter-organizations/isric.png" alt="codeobia logo"
+                class="codeobiaImg mx-auto d-block mt-1 m-3" />
+            </a>
+          </div>
+          <div class="panel">
+            <a href="http://www.icimod.org/" target="_blank" class="primary-hover" rel="noopener">
+              <img src="https://qcat.wocat.net/static/assets/img/supporter-organizations/icimod.png" alt="codeobia logo"
+                class="codeobiaImg mx-auto d-block mt-1 m-3" />
+            </a>
+          </div>
+          <div class="panel">
+            <a href="https://www.ifad.org/" target="_blank" class="primary-hover" rel="noopener">
+              <img src="  https://qcat.wocat.net/static/assets/img/supporter-organizations/ifad.png" alt="codeobia logo"
+                class="codeobiaImg mx-auto d-block mt-1 m-3" />
+            </a>
+          </div>
+          <div class="panel">
+            <a href="http://codeobia.com/" target="_blank" class="primary-hover" rel="noopener">
+              <img src="assets/codeobia-logo.png" alt="codeobia logo" class="codeobiaImg mx-auto d-block mt-1 m-3" />
+            </a>
+          </div>
 
 
-    <a href="https://icarda.org" target="_blank" class="col-md-3 col-xs-12 primary-hover border-left-light"
-      rel="noopener">
-      <img src="https://icarda.org/themes/custom/icarda/logo.svg" alt="codeobia logo"
-        class="codeobiaImg mx-auto d-block mt-1 m-3" />
-    </a>
-    <a href="https://qcat.wocat.net" target="_blank" class="col-md-3 col-xs-12 primary-hover border-left-light"
-      rel="noopener">
-      <img style="background-color: #5f594f;" src="assets/wocat_logo.svg" alt="codeobia logo"
-        class="codeobiaImg mx-auto d-block mt-1 m-3" />
-    </a>
+
+
+        </ng-template>
+      </ngx-flicking>
+
+    </div>
   </div>
 </footer>

@@ -75,6 +75,19 @@ export class AppComponent implements OnInit {
         }, 10);
 
       }
+      if (this.matdisabled) {
+        setInterval(() => {
+          if (this.filterText == '<---- Filters')
+            this.filterText = '<-  - Filters';
+          else
+            this.filterText = '<---- Filters';
+
+        }, 500)
+        setTimeout(() => {
+          this.matTooltip.show();
+        }, 1000);
+      }
+
 
       localStorage.setItem("newuser", "no");
 
@@ -83,16 +96,8 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.matdisabled = false;
-    setInterval(() => {
-      if (this.filterText == '<---- Filters')
-        this.filterText = '<-  - Filters';
-      else
-        this.filterText = '<---- Filters';
 
-    }, 500)
-    setTimeout(() => {
-      this.matTooltip.show();
-    }, 1000);
+
 
 
     this.loading$ = this.store.select(fromStore.getLoadingStatus);

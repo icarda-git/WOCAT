@@ -76,6 +76,7 @@ import { GoogleMapsComponent } from './dashboard/components/google-maps/google-m
 import { NgSplitPipeModule, NgFirstOrDefaultPipeModule, NgHeadPipeModule, NgTruncatePipeModule } from 'angular-pipes';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { TruncateModule } from '@yellowspot/ng-truncate';
+import { NgxFlickingModule } from '@egjs/ngx-flicking';
 @NgModule({
   declarations: [
     AppComponent,
@@ -158,6 +159,7 @@ import { TruncateModule } from '@yellowspot/ng-truncate';
     MatTooltipModule,
     NgHeadPipeModule,
     TruncateModule,
+    NgxFlickingModule
   ],
   entryComponents: [
     ChartComponent,
