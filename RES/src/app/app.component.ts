@@ -58,11 +58,31 @@ export class AppComponent implements OnInit {
       top: 0,
     };
   }
-  ngAfterViewInit(){
-    //this.startTour();
+  ngAfterViewInit() {
+
+    if (window && window.localStorage) {
+      // localStorage supported
+      let isnewuser = localStorage.getItem("newuser");
+      console.log(isnewuser);
+      if (isnewuser != "no") {
+        setTimeout(() => {
+          this.startTour();
+        }, 1000);
+
+      } else if (isnewuser === "no") {
+        setTimeout(() => {
+          this.matdisabled = true;
+        }, 10);
+
+      }
+
+      localStorage.setItem("newuser", "no");
+
+
+    }
   }
   ngOnInit(): void {
-   
+    this.matdisabled = false;
     setInterval(() => {
       if (this.filterText == '<---- Filters')
         this.filterText = '<-  - Filters';
