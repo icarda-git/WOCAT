@@ -49,6 +49,13 @@
   border-bottom: 3px solid map-get($customTheme, 300) !important;
 }
 
+.border-bottom-muted.is-technologies{
+  border-bottom: 3px solid  rgba(85,116,49,.8)!important;
+}
+.border-bottom-muted.is-approaches{
+  border-bottom: 3px solid rgba(210,105,41,.8) !important;
+}
+
 .border-muted {
   border: 1px solid map-get($customTheme, 300) !important;
 }

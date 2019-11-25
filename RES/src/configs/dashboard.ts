@@ -58,6 +58,51 @@ export const dashboardConfig: GeneralConfigs[] = [
   //   },
   //   tour: true,
   // },
+
+  {
+    show: true,
+    class: 'col-md-6 mt-3 no-side-padding',
+    component: 'MapComponent',
+    componentConfigs: {
+      id: 'map',
+      source: 'Country',
+      title: 'Nr. of case studies per country',
+      description: `
+          Geographic tags for all the SLM Data found are represented here and disaggregated by
+          country. The darker the color the higher the number of SLM Data tagged to that specific
+          country. Overall, the graphic shows the world areas targeted by research activities that produced
+          SLM Data. Click on ICONS:view_headline
+          to export this graphic, click on ICONS:expand_less
+          to collapse it.
+      `
+    } as ComponentDashboardConfigs,
+    scroll: {
+      icon: 'map'
+    },
+    tour: true
+  },
+  {
+    show: true,
+    class: 'col-md-6 mt-3 no-side-padding',
+    component: 'GoogleMapsComponent',
+    componentConfigs: {
+      id: 'google-map',
+      source: 'map_points',
+      title: 'Location of documented SLM',
+      description: `
+          Geographic tags for all the SLM Data found are represented here and disaggregated by
+          country. The darker the color the higher the number of SLM Data tagged to that specific
+          country. Overall, the graphic shows the world areas targeted by research activities that produced
+          SLM Data. Click on ICONS:view_headline
+          to export this graphic, click on ICONS:expand_less
+          to collapse it.
+      `
+    } as ComponentDashboardConfigs,
+    scroll: {
+      linkedWith: 'map'
+    },
+    tour: true
+  },
   {
     show: true,
     class: 'col-md-6 no-side-padding',
@@ -123,8 +168,8 @@ export const dashboardConfig: GeneralConfigs[] = [
     component: 'PieComponent',
     componentConfigs: {
       id: 'pie3',
-      title: 'Water use rights',
-      source: 'Water use rights',
+      title: 'Land use types',
+      source: 'clean_Land use type',
       description: `
           All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
@@ -136,50 +181,6 @@ export const dashboardConfig: GeneralConfigs[] = [
     },
     tour: true
   },
-  {
-    show: true,
-    class: 'col-md-6 mt-3 no-side-padding',
-    component: 'MapComponent',
-    componentConfigs: {
-      id: 'map',
-      source: 'Country',
-      title: 'Nr. of case studies per country',
-      description: `
-          Geographic tags for all the SLM Data found are represented here and disaggregated by
-          country. The darker the color the higher the number of SLM Data tagged to that specific
-          country. Overall, the graphic shows the world areas targeted by research activities that produced
-          SLM Data. Click on ICONS:view_headline
-          to export this graphic, click on ICONS:expand_less
-          to collapse it.
-      `
-    } as ComponentDashboardConfigs,
-    scroll: {
-      icon: 'map'
-    },
-    tour: true
-  },
-  {
-    show: true,
-    class: 'col-md-6 mt-3 no-side-padding',
-    component: 'GoogleMapsComponent',
-    componentConfigs: {
-      id: 'google-map',
-      source: 'map_points',
-      title: 'Location of documented SLM',
-      description: `
-          Geographic tags for all the SLM Data found are represented here and disaggregated by
-          country. The darker the color the higher the number of SLM Data tagged to that specific
-          country. Overall, the graphic shows the world areas targeted by research activities that produced
-          SLM Data. Click on ICONS:view_headline
-          to export this graphic, click on ICONS:expand_less
-          to collapse it.
-      `
-    } as ComponentDashboardConfigs,
-    scroll: {
-      linkedWith: 'map'
-    },
-    tour: true
-  },
 
   {
     show: true,
@@ -187,7 +188,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     component: 'BarComponent',
     componentConfigs: {
       id: 'barchart',
-      source: ['Land use rights', 'SLM group.keyword'],
+      source: ['Specify how the Technology was introduced', 'Of all those who have adopted the Technology, how many have did so spontaneously, i.e. without receiving any material incentives/ payments?.keyword'],
       title: 'Info Products Analytics',
       chartType: 'column',
       description: `
@@ -294,16 +295,16 @@ export const dashboardConfig: GeneralConfigs[] = [
         icon: 'repo',
         identifierUri: '_id',
         altmetric: false,
-        description: 'Description',
+        description: 'Definition of the Technology',
         tags: {
-          Author: 'Author',
+          "SLM specialists": 'SLM specialist',
           'Institution': 'Name of institution',
-          'SLM Type': 'slm_type'
+          'Compilation Date': 'date_documentation'
 
         },
         filterOptions: [
           { display: 'ID', value: 'id.keyword', sort: 'desc' },
-          { display: 'Compiled Date', value: 'date_documentation', sort: 'desc' }
+          { display: 'Compilation Date', value: 'date_documentation', sort: 'desc' }
 
         ]
       }

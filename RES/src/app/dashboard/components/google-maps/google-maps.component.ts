@@ -72,8 +72,10 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
 
 
   makeChunks(markers) {
+    if (markers.length >= 1000)
+      markers = markers.slice(0, markers.length / 2)
     this.scrollHelperService.loading = true;
-    var i, j, temparray = [], chunk = 25;
+    var i, j, temparray = [], chunk = 75;
     for (i = 0, j = markers.length; i < j; i += chunk) {
       temparray.push(markers.slice(i, i + chunk));
       // do whatever
@@ -83,6 +85,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   loopThroughMarkersText(chunks) {
 
     let markers = this.makeChunks(chunks);
+    // if (markers.length >= 1000)
 
     for (var i = 0; i < markers.length; i++) {
       // for each iteration console.log a word
@@ -94,7 +97,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
           }
           if (i == markers.length - 1)
             this.scrollHelperService.loading = false;
-        }, 500 * i));
+        }, 1000 * i));
       })(i);
     };
   }

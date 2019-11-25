@@ -23,7 +23,7 @@ import { SelectService } from 'src/app/filters/services/select/select.service';
   selector: 'app-bar',
   templateUrl: './bar.component.html',
   styleUrls: ['./bar.component.scss'],
-  providers: [ChartMathodsService, RangeService, BarService,SelectService,Store],
+  providers: [ChartMathodsService, RangeService, BarService, SelectService, Store],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarComponent extends ParentChart implements OnInit {
@@ -63,6 +63,7 @@ export class BarComponent extends ParentChart implements OnInit {
     );
     this.barService.setChartOptinos.subscribe(
       (series: Array<Highcharts.SeriesColumnOptions>) => {
+        console.log("bar update")
         if (series) {
           this.chartOptions = this.setOptions(series);
           if (this.chart) {
@@ -72,6 +73,12 @@ export class BarComponent extends ParentChart implements OnInit {
         this.cdr.detectChanges();
       }
     );
+    this.store.select(fromStore.getQuery).subscribe((query) => {
+      setTimeout(() => {
+        this.barService.getData(UpdateCallerBarChart.BarChartNgSelect);
+      }, 500);
+    
+    })
   }
 
   handleChartInstance(e: Highcharts.Chart): void {

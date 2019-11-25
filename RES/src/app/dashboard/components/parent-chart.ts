@@ -42,13 +42,17 @@ export class ParentChart extends ParentComponent {
   protected init(type: string, cb?: () => any) {
     this.cms.init(type, this.componentConfigs as ComponentDashboardConfigs, cb);
     this.cms.goBuildDataSeries.subscribe((bu: Bucket[] | MergedSelect) => {
+
       if (bu) {
         if (Array.isArray(bu)) {
           this.cms.setExpanded = bu.length >= 1;
         } else {
-          this.cms.setExpanded = this.checkExpandedForObject(bu);
+
+          // console.log( type );
+          this.cms.setExpanded = true;
         }
       } else {
+       
         this.cms.setExpanded = false;
       }
       this.buildOptions.emit(bu);

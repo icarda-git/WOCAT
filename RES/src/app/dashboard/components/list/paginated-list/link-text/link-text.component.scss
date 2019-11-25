@@ -3,7 +3,7 @@
 }
 
 .publication-text app-tags:not(:last-child):not(.simulate-p-tag)::after {
-  content: ' | ';
+  content: " | ";
 }
 
 .simulate-p-tag {
@@ -12,4 +12,11 @@
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+}
+
+.is-technologies {
+  color: rgba(85, 116, 49, 0.8);
+}
+.is-approach {
+  color: rgba(210, 105, 41, 0.8);
 }

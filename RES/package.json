@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^1.0.0",
+    "@agm/core": "1.0.0",
     "@agm/snazzy-info-window": "^1.0.0",
     "@angular/animations": "~7.2.0",
     "@angular/cdk": "^7.2.1",

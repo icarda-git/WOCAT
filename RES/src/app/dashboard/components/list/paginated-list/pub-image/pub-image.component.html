@@ -4,4 +4,9 @@
     [hidden]="loading" (load)="onLoad()" />
   <img *ngIf="source.Image" alt="162x120" [src]="source.Image | getFirstImage" class="publication-image"
     [hidden]="loading" (load)="onLoad()" />
+  <figcaption [ngClass]=" (source.id | split:'_' | head)  == 'technologies'? 'is-technologies' :'is-approach' "
+    class="tech-type">
+    <span *ngIf="(source.id | split:'_' | head)  == 'technologies'">technologies</span>
+    <span *ngIf="(source.id | split:'_' | head)  == 'approaches'">approaches</span>
+  </figcaption>
 </a>

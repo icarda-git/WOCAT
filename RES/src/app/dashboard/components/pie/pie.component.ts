@@ -42,11 +42,11 @@ export class PieComponent extends ParentChart implements OnInit {
     return {
       chart: {
         type: 'pie',
-        animation: true,
+        animation: false,
       },
       boost: {
-        enabled: true,
-        useGPUTranslations: true,
+        enabled: false,
+        useGPUTranslations: false,
       },
       plotOptions: {
         series: {

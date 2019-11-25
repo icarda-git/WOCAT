@@ -1,6 +1,51 @@
 .publication-image {
   height: auto;
-  max-height: 120px;
+  height: 204px;
   max-width: 100%;
-  float: none;
+  width: 240px;
+  float: right;
+}
+
+.tech-type.is-technologies,
+.tech-type.is-tech {
+  background-color: rgba(85, 116, 49, 0.8);
+}
+.tech-type.is-approaches,
+.tech-type.is-approach {
+  background-color: rgba(210, 105, 41, 0.8);
+}
+a {
+  display: block;
+  float: right;
+  position: relative;
+  
+}
+.tech-type {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1.5rem;
+  line-height: 0;
+  padding: 0;
+}
+
+.tech-type > span {
+  display: block;
+  position: absolute;
+  width: 11.25rem;
+  top: 50%;
+  left: -4.875rem;
+  margin-top: -0.75rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transform-origin: center center;
+  transform: rotate(-90deg);
 }
