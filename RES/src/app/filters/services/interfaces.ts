@@ -142,7 +142,7 @@ export interface AggsRules {
   size: number;
   shard_size: number;
   order: object;
-  include?: string;
+  include?: any;
 }
 
 export interface ElasticsearchQuery {

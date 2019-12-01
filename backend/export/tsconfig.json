@@ -1,0 +1,20 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "resolveJsonModule":true, 
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "rootDir": "../",
+    "inlineSourceMap": true,
+    "target": "es6",
+    "inlineSources": true,
+    "outDir": "./build"
+  },
+  "exclude": ["node_modules/**/*"],
+  "files": ["./app/app.ts"]
+}

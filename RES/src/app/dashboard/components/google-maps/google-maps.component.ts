@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { Hits, Bucket, hits } from 'src/app/filters/services/interfaces';
 import { PageEvent } from '@angular/material';
 import { AgmMap } from '@agm/core';
+import { SelectService } from 'src/app/filters/services/select/select.service';
 
 
 declare function _altmetric_embed_init(): any;
@@ -21,7 +22,7 @@ interface marker {
 @Component({
   selector: 'app-google-maps',
   templateUrl: './google-maps.component.html',
-  providers: [ScrollHelperService],
+  providers: [ScrollHelperService,SelectService],
   styleUrls: ['./google-maps.component.scss']
 })
 export class GoogleMapsComponent extends ParentComponent implements OnInit {
@@ -47,12 +48,17 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   constructor(
     public readonly store: Store<fromStore.AppState>,
     public readonly scrollHelperService: ScrollHelperService,
+    public readonly selectService: SelectService,
     private readonly cdr: ChangeDetectorRef,
 
   ) {
     super();
   }
-
+  filterMarker(code){
+    const query: bodybuilder.Bodybuilder = this.selectService.addNewValueAttributetoMainQuery('id',code);
+    this.store.dispatch(new fromStore.SetQuery(query.build()));
+    this.selectService.resetNotification();
+  }
   fullscren() {
     this.isFullscreen = !this.isFullscreen;
     this.refreshMap = false;

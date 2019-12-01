@@ -127,9 +127,9 @@ export const dashboardConfig: GeneralConfigs[] = [
     class: 'col-md-6 no-side-padding',
     component: 'PieComponent',
     componentConfigs: {
-      id: 'pie1',
-      title: 'Land ownership',
-      source: 'Land ownership',
+      id: 'pie2',
+      title: 'Land use types',
+      source: 'clean_Land use type',
       description: `
           All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
@@ -141,15 +141,14 @@ export const dashboardConfig: GeneralConfigs[] = [
     },
     tour: true
   },
-
   {
     show: true,
     class: 'col-md-6 no-side-padding',
     component: 'PieComponent',
     componentConfigs: {
-      id: 'pie2',
-      title: 'Land use rights',
-      source: 'Land use rights',
+      id: 'pie3',
+      title: 'Origin / Introduction',
+      source: 'Specify how the Technology was introduced',
       description: `
           All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
@@ -158,29 +157,51 @@ export const dashboardConfig: GeneralConfigs[] = [
     } as ComponentDashboardConfigs,
     scroll: {
       icon: 'pie_chart'
-
     },
     tour: true
-  },
+  }
+  ,
   {
-    show: true,
     class: 'col-md-6 no-side-padding',
-    component: 'PieComponent',
+    show: true,
+    component: 'ListComponent',
     componentConfigs: {
-      id: 'pie3',
-      title: 'Land use types',
-      source: 'clean_Land use type',
+      id: 'funders',
+      title: 'Institutions',
+      source: 'Name of institution',
       description: `
-          All the available SLM Data are represented here and disaggregated by Type.
-          You can toggle on/off individual type of visualization in the list at the right side of
-          the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
+          All funders tagged across all SLM Data are represented here and
+          orderd by quantity of tags for each funder. Scroll down to see more results.
+          Click on ICONS:expand_less to collapse the list.
       `
     } as ComponentDashboardConfigs,
     scroll: {
-      linkedWith: 'pie2'
+      linkedWith: 'pie3'
     },
     tour: true
   },
+
+  // {
+  //   show: true,
+  //   class: 'col-md-6 no-side-padding',
+  //   component: 'PieComponent',
+  //   componentConfigs: {
+  //     id: 'pie2',
+  //     title: 'Land use rights',
+  //     source: 'Land use rights',
+  //     description: `
+  //         All the available SLM Data are represented here and disaggregated by Type.
+  //         You can toggle on/off individual type of visualization in the list at the right side of
+  //         the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
+  //     `
+  //   } as ComponentDashboardConfigs,
+  //   scroll: {
+  //     icon: 'pie_chart'
+
+  //   },
+  //   tour: true
+  // },
+
 
   {
     show: true,
@@ -203,21 +224,40 @@ export const dashboardConfig: GeneralConfigs[] = [
     },
     tour: true
   },
+  // {
+  //   class: 'col-md-6 mt-3 no-side-padding',
+  //   show: true,
+  //   component: 'ListComponent',
+  //   componentConfigs: {
+  //     id: 'topLists',
+  //     title: 'SLM groups',
+  //     source: 'SLM group',
+  //     description: `
+  //         The top twenty Authors by number of SLM Data.
+  //         Click on ICONS:expand_less to collapse the list.
+  //     `
+  //   } as ComponentDashboardConfigs,
+  //   scroll: {
+  //     icon: 'list_alt'
+  //   },
+  //   tour: true
+  // },
   {
     class: 'col-md-6 mt-3 no-side-padding',
     show: true,
     component: 'ListComponent',
     componentConfigs: {
-      id: 'topLists',
-      title: 'SLM groups',
-      source: 'SLM group',
+      id: 'SLMmeasures',
+      title: 'SLM measures',
+      source: 'clean_SLM measures',
       description: `
-          The top twenty Authors by number of SLM Data.
+      A, V, M, S in (i)  M measures by number of SLM Data.
           Click on ICONS:expand_less to collapse the list.
       `
     } as ComponentDashboardConfigs,
     scroll: {
       icon: 'list_alt'
+
     },
     tour: true
   },
@@ -226,25 +266,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     show: true,
     component: 'ListComponent',
     componentConfigs: {
-      id: 'topAffiliations',
-      title: 'SLM measures',
-      source: 'clean_SLM measures',
-      description: `
-          Top twenty affiliations by number of SLM Data.
-          Click on ICONS:expand_less to collapse the list.
-      `
-    } as ComponentDashboardConfigs,
-    scroll: {
-      linkedWith: 'topLists'
-    },
-    tour: true
-  },
-  {
-    class: 'col-md-6 mt-3 no-side-padding',
-    show: true,
-    component: 'ListComponent',
-    componentConfigs: {
-      id: 'CRP',
+      id: 'Degradation',
       title: 'Degradation type',
       source: 'clean_Degradation type',
       description: `
@@ -255,26 +277,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       `
     } as ComponentDashboardConfigs,
     scroll: {
-      icon: 'star_rate'
-    },
-    tour: true
-  },
-  {
-    class: 'col-md-6 mt-3 no-side-padding',
-    show: true,
-    component: 'ListComponent',
-    componentConfigs: {
-      id: 'funders',
-      title: 'Institutions',
-      source: 'Name of institution',
-      description: `
-          All funders tagged across all SLM Data are represented here and
-          orderd by quantity of tags for each funder. Scroll down to see more results.
-          Click on ICONS:expand_less to collapse the list.
-      `
-    } as ComponentDashboardConfigs,
-    scroll: {
-      linkedWith: 'CRP'
+      linkedWith: 'SLMmeasures'
     },
     tour: true
   },

@@ -13,7 +13,7 @@ import { hits } from 'src/app/filters/services/interfaces';
 @Injectable()
 export class ExportService {
   private readonly api_end_export_point: string = environment.exportPoint;
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
   export(d: DataForExporter): Observable<ExporterResponse> {
     return this.http.post(this.api_end_export_point, d) as Observable<
@@ -23,20 +23,12 @@ export class ExportService {
 
   createXlsxFile({ hits }: ExportFilesModal): Array<Array<string>> {
     return hits.map(({ _source }: hits) => [
-      _source.title,
-      _source.citation,
-      _source.date,
-      this.formatter(_source.author),
-      _source.publisher,
-      _source.status,
-      _source.crp,
-      this.formatter(_source.affiliation),
-      this.formatter(_source.language),
-      this.formatter(_source.subject),
-      _source.region,
-      this.formatter(_source.country),
-      this.formatter(_source.repo),
-      _source.handle
+      _source.Name,
+      _source['Definition of the Technology'],
+      this.formatter(_source['Name of institution']),
+      _source['date_documentation'],
+      this.formatter(_source['SLM specialist']),
+      'https://qcat.wocat.net/en/wocat/technologies/view/' + _source.id
     ]);
   }
 
@@ -48,25 +40,17 @@ export class ExportService {
   }
 
   private formatter(toFormat: Array<string> | string): string {
-    return Array.isArray(toFormat) ? toFormat.join('; ') : toFormat || 'None';
+    return Array.isArray(toFormat) ? toFormat.join(', ') : toFormat || 'None';
   }
 
   private getHeader(): Array<string> {
     return [
-      'Title',
-      'Citation',
-      'Date',
-      'Author(s)',
-      'Publisher',
-      'Status',
-      'CRP',
-      'Affiliation(s)',
-      'Language',
-      'Subject(s)',
-      'Region',
-      'Country(ies)',
-      'Repository(ies)',
-      'Handle'
+      'Name',
+      'Definition of the Technology',
+      'Institutions',
+      'Compilation Date',
+      'SLM specialists',
+      'link'
     ];
   }
 }

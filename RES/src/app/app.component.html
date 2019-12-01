@@ -27,7 +27,7 @@
 
     <mat-nav-list *ngIf="render" class="m-2">
 
-      <button mat-button mat-raised-button (click)="addRemoveOrOperator()" color="primary" class="w-100">
+      <!-- <button mat-button mat-raised-button (click)="addRemoveOrOperator()" color="primary" class="w-100">
         Boolean Operator
         <ng-container *ngIf="orOperator; else and">
           <strong>OR</strong>
@@ -42,7 +42,7 @@
         <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
           <app-icons-with-text [text]="orAndToolTip"></app-icons-with-text>
         </mde-popover>
-      </button>
+      </button> -->
       <button *ngIf="isSmall" color="warn" mat-button mat-raised-button class="w-100 mt-2" (click)="sidenav.close()">
         Close
       </button>

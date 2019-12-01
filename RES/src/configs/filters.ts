@@ -14,99 +14,21 @@ export const filtersConfig: GeneralConfigs[] = [
       text: `Create your query by entering choices in one of
         more filters below, click on ICONS:loop to clear your query.`,
     } as ComponentLabelConfigs,
+  },{
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'ID',
+      source: 'id.keyword',
+      addInMainQuery: false,
+    } as ComponentFilterConfigs,
   },
-  // {
-  //   show: true,
-  //   component: 'SearchComponent',
-  //   componentConfigs: {
-  //     placeholder: 'Search for Title, Author, etc',
-  //     type: searchOptions.allSearch,
-  //   } as ComponentSearchConfigs,
-  // },
   {
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
       placeholder: 'SLM Type)',
       source: 'slm_type.keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      placeholder: 'Water use rights(s)',
-      source: 'Water use rights.keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      placeholder: 'Land ownership',
-      source: 'Land ownership.keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      placeholder: 'Land use rights(s)',
-      source: 'Land use rights.keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      placeholder: 'Institution(s)',
-      source: 'Name of institution.keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      placeholder: 'Main purpose(s)',
-      source: 'Main purpose(s) of the Technology (land user’s perspective).keyword',
-      addInMainQuery: true,
-    } as ComponentFilterConfigs,
-  },
-  // {
-  //   show: true,
-  //   component: 'LabelComponent',
-  //   componentConfigs: {
-  //     text: 'Year(s)',
-  //   } as ComponentLabelConfigs,
-  // },
-  // {
-  //   show: true,
-  //   component: 'RangeComponent',
-  //   componentConfigs: {
-  //     source: 'year.keyword',
-  //     addInMainQuery: false,
-  //   } as ComponentFilterConfigs,
-  // },
-  // {
-  //   show: true,
-  //   component: 'SearchComponent',
-  //   componentConfigs: {
-  //     placeholder: 'Title',
-  //     type: searchOptions.titleSearch,
-  //   } as ComponentSearchConfigs,
-  // },
-  {
-    show: true,
-    component: 'SelectComponent',
-    componentConfigs: {
-      helpText:'this is just a help text',
-      placeholder: 'Location(s)',
-      source: 'Location.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -132,9 +54,56 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'SLM specialist',
-      source: 'SLM specialist.keyword',
+      placeholder: 'Select Agro-climatic zone',
+      source: 'Agro-climatic zone.keyword',
+      addInMainQuery: false,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Institution(s)',
+      source: 'Name of institution.keyword',
       addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Main purpose(s) of the Technology',
+      source: 'Main purpose(s) of the Technology (land user’s perspective).keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Land use type(s)',
+      source: 'clean_Land use type.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Select Degradation type',
+      source: 'clean_Degradation type.keyword',
+      addInMainQuery: true,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Goal of the Technology with regards to land degradation',
+      source: 'Specify the goal of the Technology with regard to land degradation.keyword',
+      addInMainQuery: false,
     } as ComponentFilterConfigs,
   },
   {
@@ -150,25 +119,46 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
+      helpText:'A, V, M, S in (i) ',
       placeholder: 'Select SLM measures',
       source: 'clean_SLM measures.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
-  // {
-  //   show: true,
-  //   component: 'LabelComponent',
-  //   componentConfigs: {
-  //     text: 'Affiliation and Donors',
-  //     border: true,
-  //   } as ComponentLabelConfigs,
-  // },
+
   {
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select Slopes on average',
+      placeholder: 'Altitudinal zone',
+      source: 'Altitudinal zone.keyword',
+      addInMainQuery: false,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Annual rainfall',
+      source: 'Specify average annual rainfall (if known), in mm',
+      addInMainQuery: false,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Slopes',
       source: 'Slopes on average.keyword',
+      addInMainQuery: false,
+    } as ComponentFilterConfigs,
+  },
+  {
+    show: true,
+    component: 'SelectComponent',
+    componentConfigs: {
+      placeholder: 'Land use rights(s)',
+      source: 'Land use rights.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -176,53 +166,18 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select Landforms',
-      source: 'Landforms.keyword',
+      placeholder: 'Marked orientation of production system',
+      source: 'Market orientation of production system.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
   {
-    show: true,
+    show: false,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'Select Degradation type',
-      source: 'clean_Degradation type.keyword',
+      placeholder: 'SLM specialists',
+      source: 'SLM specialist.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
-  },
-  // {
-  //   show: true,
-  //   component: 'LabelComponent',
-  //   componentConfigs: {
-  //     text: 'Sources',
-  //     border: true,
-  //     description: `
-  //       Select specific repositories to look up, leave it blank to
-  //       loop up in all available repositories. Select specific
-  //       CGSpace communities and MELSpace collecions to look up,
-  //       leave it blank to look up in all available communities
-  //       and collections.
-  //     `,
-  //   } as ComponentLabelConfigs,
-  // },
-  // {
-  //   show: true,
-  //   component: 'SelectComponent',
-  //   componentConfigs: {
-  //     expandPosition: 'top',
-  //     placeholder: 'Select repository(ies)',
-  //     source: 'repo.keyword',
-  //     addInMainQuery: false,
-  //   } as ComponentFilterConfigs,
-  // },
-  // {
-  //   show: true,
-  //   component: 'SelectComponent',
-  //   componentConfigs: {
-  //     expandPosition: 'top',
-  //     placeholder: 'Select Community(ies)',
-  //     source: 'community.keyword',
-  //     addInMainQuery: false,
-  //   } as ComponentFilterConfigs,
-  // },
+  }
 ];

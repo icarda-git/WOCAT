@@ -63,6 +63,7 @@ export class MapComponent extends ParentChart implements OnInit {
       },
       colorAxis: {
         min: 1,
+        max: 100,
         type: 'logarithmic',
         minColor: axisColorForMap.minColor,
         maxColor: axisColorForMap.maxColor,

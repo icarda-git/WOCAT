@@ -25,23 +25,23 @@
     </ng-select>
   </div>
   <div class="text-right">
-    <!-- <button
+    <button
       class="v-center"
       mat-icon-button
       [matMenuTriggerFor]="menu"
       aria-label="Options for exporting files"
     >
       <mat-icon>get_app</mat-icon>
-    </button> -->
+    </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="startExportingNow('pdf')">
+      <!-- <button mat-menu-item (click)="startExportingNow('pdf')">
         <img src="assets/export/pdf.png" />
         <span>Pdf</span>
       </button>
       <button mat-menu-item (click)="startExportingNow('docx')">
         <img src="assets/export/docx.png" />
         <span>word</span>
-      </button>
+      </button> -->
       <button mat-menu-item (click)="startExportingNow('xlsx')">
         <img src="assets/export/xlsx.png" />
         <span>Excel</span>

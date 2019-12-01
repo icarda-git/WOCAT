@@ -8,7 +8,7 @@ The Open Repository Explorer and Visualizer (OpenRXV) is a dashboard-like tool t
 
 This project contains a backend indexer powered by [Node.js](https://nodejs.org/) and [Elasticsearch](https://www.elastic.co), and a dynamic frontend built with [Angular](https://angular.io), [Bootstrap](https://getbootstrap.com), [Highcharts](https://www.highcharts.com/), [Angular Material](https://material.angular.io/), and [Ngrx](https://ngrx.io/). The application is wrapped up and deployed via [Docker](https://www.docker.com/). This product includes GeoLite2 data created by MaxMind, available from [https://www.maxmind.com](https://www.maxmind.com).
 
-You can see an example of the project working on our [Agricultural Research e-Seeker (AReS)](https://cgspace.cgiar.org/explorer/).
+You can see an example of the project working on our [Agricultural Research e-Seeker (WOCAT)](https://cgspace.cgiar.org/explorer/).
 
   
 
@@ -55,16 +55,16 @@ Configuration of repositories and metadata to harvest is in `backend/config/inde
 ## Build and Run  
 
 ```console
-$ git clone https://github.com/ILRI/AReS.git
-$ cd AReS/frontend
+$ git clone https://github.com/ILRI/WOCAT.git
+$ cd WOCAT/frontend
 $ npm i
 $ npm install -g @angular/cli
 $ ng build --prod # for building the project in production mode
 $ # or
 $ ng serve --base-href=/explorer/ # for developing locally
-$ cd AReS/app
+$ cd WOCAT/app
 $ npm i
-$ cd AReS
+$ cd WOCAT
 $ sudo chmod 777 -R esConfig/
 $ docker-compose up -d
 ```

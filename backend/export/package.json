@@ -1,0 +1,38 @@
+{
+  "name": "ares_exporter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "prod": "tsc && node ./build/app.js"
+  },
+  "keywords": [],
+  "author": "Mohammed Al-rowad",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.2.0",
+    "@types/cors": "^2.8.5",
+    "@types/elasticsearch": "^5.0.34",
+    "@types/express": "^4.17.0",
+    "@types/ora": "^3.2.0",
+    "@types/uuid": "^3.4.5",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "docx-pdf": "0.0.1",
+    "docxtemplater": "^3.13.6",
+    "express": "^4.17.1",
+    "jszip": "^2.6.1",
+    "ora": "^3.4.0",
+    "ts-node-dev": "^1.0.0-pre.40",
+    "typescript": "^3.5.3",
+    "uuid": "^3.3.2",
+    "word2pdf": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.2",
+    "eslint": "^6.0.1"
+  }
+}

@@ -8,7 +8,7 @@
     "index_type": "item",
     "index_alias": "items",
     "elasticsearch": {
-        "host": "elasticsearch:9200"
+        "host": "localhost:9200"
     },
     "redis": {
         "host": "redis",

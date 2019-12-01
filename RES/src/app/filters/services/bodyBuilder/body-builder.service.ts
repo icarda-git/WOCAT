@@ -95,18 +95,23 @@ export class BodyBuilderService {
     return query.aggregation('terms', termRules, source);
   }
 
-  private addInclude(term: string, termRules: AggsRules): void {
+  private addInclude(term: any, termRules: AggsRules): void {
     // replace each character with "(LowerCase|UpperCase)" //regex format
-    term = term
-      .split('')
-      .map(character =>
-        character !== ' '
-          ? '(' + character.toLowerCase() + '|' + character.toUpperCase() + ')'
-          : character
-      )
-      .join('');
-    // build a regex to match any item that has (full or partial) all the words
-    termRules.include = '.*' + term.split(' ').join('.*&.*') + '.*';
+    if (isNaN(term)) {
+      term = term
+        .split('')
+        .map(character =>
+          character !== ' '
+            ? '(' + character.toLowerCase() + '|' + character.toUpperCase() + ')'
+            : character
+        )
+        .join('');
+      // build a regex to match any item that has (full or partial) all the words
+      termRules.include = '.*' + term.split(' ').join('.*&.*') + '.*';
+    } else {
+      termRules.include = [term]
+    }
+
   }
 
   private buildTermRules(size: number, source: any): AggsRules {

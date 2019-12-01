@@ -113,14 +113,14 @@ export class BarServiceComposer {
     changeBy: UpdateCallerBarChart
   ): void {
     if (changeBy === UpdateCallerBarChart.BarChartNgSelect) {
-      if (this.selectedYears.length) {
+      if (this.selectedYears && this.selectedYears.length) {
         queryToMerge.query(
           'terms',
           this.secondFilterKeyWord,
           this.selectedYears
         );
       }
-      if (this.selectedCategories.length) {
+      if (this.selectedCategories && this.selectedCategories.length) {
         queryToMerge.query(
           'terms',
           this.firstFilterKeyWord,

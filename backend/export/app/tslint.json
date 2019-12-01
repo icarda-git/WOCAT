@@ -1,0 +1,23 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-any": true,
+    "semicolon": [true, "always"],
+    "class-name": true,
+    "comment-format": [true, "check-space"],
+    "curly": true,
+    "max-line-length": [true, 140],
+    "triple-equals": [true, "allow-null-check"]
+  }
+}

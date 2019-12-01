@@ -65,21 +65,8 @@ export const countersConfig: GeneralConfigs[] = [
   {
     show: true,
     componentConfigs: {
-      id: 'Location',
-      title: 'Locations',
-      source: 'Location.keyword',
-      description: `
-        Total number of SLM Data only accessible
-        as by Locations specifications.
-      `,
-    } as ComponentCounterConfigs,
-    tour: true,
-  },
-  {
-    show: true,
-    componentConfigs: {
       id: 'CRPs&Platforms',
-      title: 'people involved',
+      title: 'SLM specialists',
       source: 'SLM specialist.keyword',
       description: `
         Total number of people involved with he information
