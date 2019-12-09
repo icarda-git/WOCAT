@@ -1,75 +1,89 @@
-version: '3.1'
+version: "3.1"
 services:
   arena:
-     container_name: arena
-     working_dir: /backend/arena
-     restart: always
-     image: node
-     command: "npm run install_and_run"
-     volumes:
-       - ../backend:/backend
-     ports:
-       - 127.0.0.1:4567:4567
-     depends_on:
-       - redis
-     links:
-       - redis   
+    container_name: arena
+    working_dir: /backend/arena
+    restart: always
+    image: node
+    command: "npm run install_and_run"
+    volumes:
+      - ../backend:/backend
+    ports:
+      - 127.0.0.1:4567:4567
+    depends_on:
+      - redis
+    links:
+      - redis
+  export:
+    container_name: export
+    working_dir: /backend/export
+    restart: always
+    image: node
+    command: "npm run install_and_run"
+    volumes:
+      - ../backend:/backend
+    ports:
+      - 127.0.0.1:3000:3000
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
   harvestor:
-     container_name: harvestor
-     working_dir: /backend/harvest
-     restart: always
-     image: node
-     command: "npm run install_and_run"
-     volumes:
-       - ../backend:/backend
-     depends_on:
-       - elasticsearch
-       - redis
-     links:
-       - elasticsearch
-       - redis            
+    container_name: harvestor
+    working_dir: /backend/harvest
+    restart: always
+    image: node
+    command: "npm run install_and_run"
+    volumes:
+      - ../backend:/backend
+    depends_on:
+      - elasticsearch
+      - redis
+    links:
+      - elasticsearch
+      - redis
   angular_nginx:
-    container_name: angular_nginx 
+    container_name: angular_nginx
     image: angular_nginx
     build: angularBuild
     restart: always
     volumes:
-       - ../RES:/frontend
-       - ./default.conf:/etc/nginx/sites-available/default 
+      - ../RES:/frontend
+      - ./default.conf:/etc/nginx/sites-available/default
     ports:
-       - 127.0.0.1:80:80
+      - 127.0.0.1:80:80
     depends_on:
-       - elasticsearch
-       - kibana
+      - elasticsearch
+      - kibana
     links:
-       - elasticsearch
-       - kibana   
+      - elasticsearch
+      - kibana
   redis:
-      container_name: redis
-      image: redis
-      restart: always
-      volumes:
-        - ./redisData:/data
-      ports:
-        - 127.0.0.1:6379:6379
+    container_name: redis
+    image: redis
+    restart: always
+    volumes:
+      - ./redisData:/data
+    ports:
+      - 127.0.0.1:6379:6379
   elasticsearch:
-      image: elasticsearch:6.6.1
-      container_name: elasticsearch
-      restart: always
-      environment:
-        - cluster.name=docker-cluster
-        - bootstrap.memory_lock=true
-        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      ulimits:
-        memlock:
-          soft: -1
-          hard: -1
-      volumes:
-        - ./esData:/usr/share/elasticsearch/data
-        - ./esConfig:/usr/share/elasticsearch/config
-      ports:
-        - 127.0.0.1:9200:9200
-        - 127.0.0.1:9300:9300
+    image: elasticsearch:6.6.1
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./esData:/usr/share/elasticsearch/data
+      - ./esConfig:/usr/share/elasticsearch/config
+    ports:
+      - 127.0.0.1:9200:9200
+      - 127.0.0.1:9300:9300
   kibana:
     container_name: kibana
     restart: always
@@ -77,8 +91,8 @@ services:
     depends_on:
       - elasticsearch
     links:
-      - elasticsearch  
+      - elasticsearch
     ports:
       - 127.0.0.1:5601:5601
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200        
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
