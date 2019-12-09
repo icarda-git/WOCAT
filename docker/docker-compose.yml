@@ -51,7 +51,7 @@ services:
       - ../RES:/frontend
       - ./default.conf:/etc/nginx/sites-available/default
     ports:
-      - 127.0.0.1:80:80
+      - 80:80
     depends_on:
       - elasticsearch
       - kibana
