@@ -1,26 +1,18 @@
 <article class="w-100 break-word">
-  <a
-    target="_blank"
-    class="primary-text"
-    rel="noopener"
-    [href]="'https://qcat.wocat.net/en/wocat/technologies/view/'+source.id+'/'"
-  >
+  <a target="_blank" class="primary-text" rel="noopener"
+    [href]="'https://qcat.wocat.net/en/wocat/technologies/view/'+source.id+'/'">
     <h2 [ngClass]="(source.id | split:'_' | head)  == 'technologies'? 'is-technologies' :'is-approach'">
       {{ source[content.title] }}
     </h2>
   </a>
-  <p *ngIf="source[content.description]">
-    {{ source[content.description] | words : 80 : "..." }}
+  <p *ngIf="source[content.description] || source['Short description of the Approach'] ">
+    {{ source[content.description] || source['Short description of the Approach'] }}
   </p>
   <section class="publication-text pt-2">
     <ng-container *ngFor="let label of objectKeys(content.tags); let i = index">
       <ng-container *ngIf="source[content.tags[label]]">
-        <app-tags
-          [ngClass]="{ 'simulate-p-tag': i === 0 || i === 1 }"
-          [key]="content.tags[label]"
-          [label]="label"
-          [labelData]="source[content.tags[label]]"
-        ></app-tags>
+        <app-tags [ngClass]="{ 'simulate-p-tag': i === 0 || i === 1 }" [key]="content.tags[label]" [label]="label"
+          [labelData]="source[content.tags[label]]"></app-tags>
       </ng-container>
     </ng-container>
   </section>

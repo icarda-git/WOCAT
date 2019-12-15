@@ -27,7 +27,7 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SearchComponent',
     componentConfigs: {
-      placeholder: 'Search for Title, Author, etc',
+      placeholder: 'Search for Title,keyword,',
       type: searchOptions.allSearch,
     } as ComponentSearchConfigs,
   },

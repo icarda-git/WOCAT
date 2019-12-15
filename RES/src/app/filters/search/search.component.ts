@@ -49,6 +49,8 @@ export class SearchComponent extends ParentComponent implements OnInit {
     const { type } = this.componentConfigs as ComponentSearchConfigs;
     let fields = filtersConfig.filter(d => d.componentConfigs.source).map(d => d.componentConfigs.source + '^1.5')
     fields.push("Name^1.6")
+    fields.push("Detailed description of the Approach^1.3")
+    fields.push("Short description of the Approach^1.3")
     if (type === searchOptions.allSearch) {
       this.bodyBuilderService.setAggAttributes = <QuerySearchAttribute>{
         query: {
