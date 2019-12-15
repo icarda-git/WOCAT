@@ -10,7 +10,7 @@ import { fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
 import { BodyBuilderService } from '../services/bodyBuilder/body-builder.service';
 import { ParentComponent } from 'src/app/parent-component.class';
-
+import { filtersConfig } from 'src/configs/filters'
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -33,25 +33,31 @@ export class SearchComponent extends ParentComponent implements OnInit {
   }
 
   onClick() {
-    if (this.checkIfInputIsEmpty()) {
-      this.checkTypeThenDelete();
-      return;
-    }
+   
     this.applySearchTerm();
   }
 
   private deleteFromMainQuery(allSearch: boolean): string {
     return this.bodyBuilderService.deleteFromMainQuery(allSearch);
   }
-
+  prepareQueryString(string: string) {
+    string = string.replace(new RegExp('\\&|\\||\\!|\\(|\\)|\\{|\\}|\\[|\\]|\\^|\\"|\\~|\\*|\\?|\\:|\\-|\\\\|\\/|\\=|\\+|\\%|\\,|\\@', 'gm'), ' ');//remove special characters
+    string = string.trim().replace(new RegExp('\\s{2,}', 'gm'), ' ');//remove extra whitespaces
+    return '*' + string.split(' ').join('* *') + '*';
+  }
   private applySearchTerm(): void {
     const { type } = this.componentConfigs as ComponentSearchConfigs;
+    let fields = filtersConfig.filter(d => d.componentConfigs.source).map(d => d.componentConfigs.source + '^1.5')
+    fields.push("Name^1.6")
     if (type === searchOptions.allSearch) {
-      this.bodyBuilderService.setAggAttributes = {
-        fuzziness: 'AUTO',
-        operator: 'and',
-        query: this.searchTerm,
-      } as QuerySearchAttribute;
+      this.bodyBuilderService.setAggAttributes = <QuerySearchAttribute>{
+        query: {
+          "query_string": {
+            "fields": fields,
+            "query": this.prepareQueryString(this.searchTerm)
+          }
+        }
+      }
     } else {
       this.bodyBuilderService.setAggAttributes = this.searchTerm;
     }

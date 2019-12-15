@@ -1,6 +1,6 @@
 <mat-form-field class="w-100">
   <mat-placeholder>{{ componentConfigs.placeholder }}</mat-placeholder>
-  <input matInput type="search" [(ngModel)]="searchTerm" #search />
+  <input (keyup.enter)="onClick()" matInput type="search" [(ngModel)]="searchTerm" #search />
   <button
     aria-label="Search Button"
     mat-button

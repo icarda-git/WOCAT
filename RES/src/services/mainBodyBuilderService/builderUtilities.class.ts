@@ -63,7 +63,13 @@ export class BuilderUtilities {
       this.or
         ? b.orFilter('match', { [key]: this.aggAttributes[key] })
         : b.filter('match', { [key]: this.aggAttributes[key] });
-    } else {
+    }
+    else if (this.aggAttributes[key].query_string) {
+      //console.log(this.aggAttributes[key])
+      b.query('query_string', this.aggAttributes[key].query_string)
+    }
+    else {
+      console.log(this.aggAttributes[key]);
       this.aggAttributes[key].forEach((s: string) =>
         this.or ? b.orFilter('term', key, s) : b.filter('term', key, s)
       );
@@ -95,17 +101,17 @@ export class BuilderUtilities {
     mainQuerySources.forEach((key: string) =>
       key.includes('slm_type')
         ? arr.push(
-            {
-              source: `${key}.keyword`,
-              buckets: key,
-              filter: this.openLimitedAcc[0],
-            },
-            {
-              source: `${key}.keyword`,
-              buckets: key,
-              filter: this.openLimitedAcc[1],
-            }
-          )
+          {
+            source: `${key}.keyword`,
+            buckets: key,
+            filter: this.openLimitedAcc[0],
+          },
+          {
+            source: `${key}.keyword`,
+            buckets: key,
+            filter: this.openLimitedAcc[1],
+          }
+        )
         : arr.push({ source: `${key}.keyword`, buckets: key })
     );
     return arr;
@@ -118,18 +124,18 @@ export class BuilderUtilities {
     return [
       ...(filterBasedOnAddInMainQuery
         ? configs
-            .filter(
-              ({ componentConfigs }: GeneralConfigs) =>
-                (componentConfigs as any).addInMainQuery
-            )
-            .map(
-              ({ componentConfigs }: GeneralConfigs) =>
-                (componentConfigs as any).source
-            )
-        : configs.map(
+          .filter(
+            ({ componentConfigs }: GeneralConfigs) =>
+              (componentConfigs as any).addInMainQuery
+          )
+          .map(
             ({ componentConfigs }: GeneralConfigs) =>
               (componentConfigs as any).source
-          )),
+          )
+        : configs.map(
+          ({ componentConfigs }: GeneralConfigs) =>
+            (componentConfigs as any).source
+        )),
     ]
       .map((s: string | Array<string>) =>
         !Array.isArray(s) && s ? s.replace('.keyword', '') : undefined

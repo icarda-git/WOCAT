@@ -25,6 +25,14 @@ export const filtersConfig: GeneralConfigs[] = [
   },
   {
     show: true,
+    component: 'SearchComponent',
+    componentConfigs: {
+      placeholder: 'Search for Title, Author, etc',
+      type: searchOptions.allSearch,
+    } as ComponentSearchConfigs,
+  },
+  {
+    show: true,
     component: 'SelectComponent',
     componentConfigs: {
       placeholder: 'SLM Type)',
