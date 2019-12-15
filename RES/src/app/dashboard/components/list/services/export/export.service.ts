@@ -28,7 +28,7 @@ export class ExportService {
       this.formatter(_source['Name of institution']),
       _source['date_documentation'],
       this.formatter(_source['SLM specialist']),
-      this.formatter(_source['Countries']),
+      this.formatter(_source['Country']),
       'https://qcat.wocat.net/en/wocat/technologies/view/' + _source.id
     ]);
   }
