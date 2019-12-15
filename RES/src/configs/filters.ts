@@ -27,7 +27,7 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SearchComponent',
     componentConfigs: {
-      placeholder: 'Search for Title,keyword,',
+      placeholder: 'Search for Title, keyword, description, etc...',
       type: searchOptions.allSearch,
     } as ComponentSearchConfigs,
   },
@@ -35,7 +35,7 @@ export const filtersConfig: GeneralConfigs[] = [
     show: true,
     component: 'SelectComponent',
     componentConfigs: {
-      placeholder: 'SLM Type)',
+      placeholder: 'SLM Practices',
       source: 'slm_type.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,

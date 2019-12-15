@@ -24,10 +24,11 @@ export class ExportService {
   createXlsxFile({ hits }: ExportFilesModal): Array<Array<string>> {
     return hits.map(({ _source }: hits) => [
       _source.Name,
-      _source['Definition of the Technology'],
+      _source['Definition of the Technology'] || _source['Short description of the Approach'],
       this.formatter(_source['Name of institution']),
       _source['date_documentation'],
       this.formatter(_source['SLM specialist']),
+      this.formatter(_source['Countries']),
       'https://qcat.wocat.net/en/wocat/technologies/view/' + _source.id
     ]);
   }
@@ -50,6 +51,7 @@ export class ExportService {
       'Institutions',
       'Compilation Date',
       'SLM specialists',
+      'Countries',
       'link'
     ];
   }

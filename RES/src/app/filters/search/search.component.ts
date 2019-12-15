@@ -51,6 +51,9 @@ export class SearchComponent extends ParentComponent implements OnInit {
     fields.push("Name^1.6")
     fields.push("Detailed description of the Approach^1.3")
     fields.push("Short description of the Approach^1.3")
+    fields.push("Definition of the Technology^1.3")
+    fields.push("Description^1.3")
+    
     if (type === searchOptions.allSearch) {
       this.bodyBuilderService.setAggAttributes = <QuerySearchAttribute>{
         query: {
