@@ -4,10 +4,10 @@
     "index_type": "item",
     "index_alias": "items",
     "elasticsearch": {
-        "host": "localhost:9200"
+        "host": "elasticsearch:9200"
     },
     "redis": {
-        "host": "localhost",
+        "host": "redis",
         "port": 6379
     },
     "cron": "0 0 * * *",
