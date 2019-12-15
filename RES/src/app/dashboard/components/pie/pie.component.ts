@@ -31,7 +31,7 @@ export class PieComponent extends ParentChart implements OnInit {
     super(cms, selectService, store);
   }
   filterd= false;
-  resetFilter() {
+  resetFilter(value:boolean = false) {
     this.resetQ()
   }
   ngOnInit(): void {

@@ -51,7 +51,7 @@ export class MapComponent extends ParentChart implements OnInit {
       this.cdr.detectChanges();
     });
   }
-  resetFilter() {
+  resetFilter(value:boolean = false) {
     this.resetQ()
   }
 
