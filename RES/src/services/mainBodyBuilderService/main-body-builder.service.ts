@@ -146,7 +146,7 @@ export class MainBodyBuilderService extends BuilderUtilities {
     }
     // bitstreams needed for the images
     // handle needed for the altmetric
-    rows.push('thumbnail', 'handle', 'bitstreams', 'Image','Short description of the Approach');
+    rows.push('thumbnail', 'handle','Country', 'bitstreams', 'Image','Short description of the Approach');
     return rows;
   }
 
