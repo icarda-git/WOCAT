@@ -47,7 +47,7 @@ export class SelectComponent extends ParentComponent implements OnInit {
     this.searchTerms$ = new Subject();
     this.size = 10;
     this.doNotChange = false;
-    this.selectedOptions ;
+    this.selectedOptions;
     this.opened = false;
   }
 
@@ -86,7 +86,7 @@ export class SelectComponent extends ParentComponent implements OnInit {
       this.doNotChange = false;
       this.getDataAndToggle();
     }
-   
+
   }
 
   /**
@@ -124,13 +124,19 @@ export class SelectComponent extends ParentComponent implements OnInit {
   }
   private subtoToQuery(source): void {
     this.store.select(fromStore.getQuery).subscribe((query) => {
-        let filters = this.bodyBuilderService.getFiltersFromQuery();
-        filters.forEach((element) => {
-          for (var key in element)
-            if (key == source) {
-              this.selectedOptions = [...this.selectedOptions.filter(d => d.key != element[key]),...[{ key: element[key], doc_count: 1 }]]
-            }
-        });
+      let filters = this.bodyBuilderService.getFiltersFromQuery();
+
+      filters.forEach((element) => {
+
+        for (var key in element)
+          if (key == source) {
+            this.selectedOptions = [...this.selectedOptions.filter(d => d.key != element[key]), ...[{ key: element[key], doc_count: 1 }]]
+          }
+      });
+
+      if (!filters.filter(element => element[source]).length)
+        this.selectedOptions = [];
+
     });
   }
 

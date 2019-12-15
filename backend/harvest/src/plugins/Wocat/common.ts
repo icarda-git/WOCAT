@@ -17,7 +17,7 @@ var lookup = require('country-data').lookup;
 var moment = require('moment');
 export class common implements Harvester {
     repo: any
-    url = ""
+    url = ''
     esClient: Client;
     repeatJobs: Queue;
     fetchQueue: Queue;
@@ -45,7 +45,8 @@ export class common implements Harvester {
         this.repeatJobs = new Bull(this.repo.name + '_repeat', { redis: config.redis });
 
         this.esClient = new Client(this.conf());
-        this.url = this.repo.itemsEndPoint+'?type=[technologies,approaches]';
+
+        this.url = this.repo.itemsEndPoint + this.repo.code;
     }
 
     conf() {
@@ -54,7 +55,6 @@ export class common implements Harvester {
     fetch = (job: any, done: any) => {
         job.progress(20);
         let url = job.data.url
-
         request({
             headers: { "Authorization": `Token ${this.apikey}` },
             url,
@@ -142,8 +142,6 @@ export class common implements Harvester {
 
         let finalObj: any = {}
         finalObj['id'] = code;
-        if (code.split('_')[0] == "unccd")
-            return;
 
         finalObj['slm_type'] = code.split('_')[0]
         this.traverse(jsonData, (obj: any, key: any, val: any) => {
@@ -169,14 +167,14 @@ export class common implements Harvester {
                 }
             }
 
-            if (key == "value" && val && val[0] && obj.label && obj.label == 'Select category(ies) / code(s)') {
-                if (val[0].key && val[0].values && !finalObj['clean_' + val[0].key]) {
-                    finalObj['clean_' + val[0].key] = val[0].values
-                }
-                else if (val[0].key && val[0].values && finalObj['clean_' + val[0].key])
-                    finalObj['clean_' + val[0].key] = [...finalObj['clean_' + val[0].key], ...val[0].values]
+            // if (key == "value" && val && val[0] && obj.label && obj.label == 'Select category(ies) / code(s)') {
+            //     if (val[0].key && val[0].values && !finalObj['clean_' + val[0].key]) {
+            //         finalObj['clean_' + val[0].key] = val[0].values
+            //     }
+            //     else if (val[0].key && val[0].values && finalObj['clean_' + val[0].key])
+            //         finalObj['clean_' + val[0].key] = [...finalObj['clean_' + val[0].key], ...val[0].values]
 
-            }
+            // }
 
             if (key == "user_id" && val && val.value) {
 
@@ -225,6 +223,19 @@ export class common implements Harvester {
         })
         if (finalObj['slm_type'] != 'approaches' && finalObj['First name(s)'] && finalObj['Lastname / surname'])
             finalObj['SLM specialist'].push(finalObj['First name(s)'] + finalObj['Lastname / surname'])
+
+        if (finalObj['Land use type'])
+            finalObj['Land use type'] = finalObj['Land use type'].map((element: any) => element[0])
+
+        if (finalObj['SLM measures'])
+            finalObj['SLM measures'] = finalObj['SLM measures'].map((element: any) => element[0])
+
+        if (finalObj['Degradation type'])
+            finalObj['Degradation type'] = finalObj['Degradation type'].map((element: any) => element[0])
+
+
+
+
         return finalObj;
     }
 

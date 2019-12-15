@@ -23,11 +23,21 @@ export class ParentChart extends ParentComponent {
   }
 
   Query(name: any) {
- 
+
     const { source } = this.componentConfigs as ComponentFilterConfigs;
-    const query: bodybuilder.Bodybuilder = this.selectService.addNewValueAttributetoMainQuery(source,name);
+    const query: bodybuilder.Bodybuilder = this.selectService.addNewValueAttributetoMainQuery(source, name);
     this.store.dispatch(new fromStore.SetQuery(query.build()));
     this.selectService.resetNotification();
+  }
+  resetQ() {
+    const { source } = this.componentConfigs as ComponentFilterConfigs;
+   
+    const query: bodybuilder.Bodybuilder = this.selectService.resetValueAttributetoMainQuery(source);
+    this.store.dispatch(new fromStore.SetQuery(query.build()));
+    setTimeout(() => {
+      this.selectService.resetNotification();
+    }, 5000);
+   
   }
   setQ() {
     var _self = this;
@@ -52,7 +62,7 @@ export class ParentChart extends ParentComponent {
           this.cms.setExpanded = true;
         }
       } else {
-       
+
         this.cms.setExpanded = false;
       }
       this.buildOptions.emit(bu);

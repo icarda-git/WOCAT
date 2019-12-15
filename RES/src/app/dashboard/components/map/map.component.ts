@@ -15,6 +15,7 @@ import { SelectService } from 'src/app/filters/services/select/select.service';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../../store';
 import { ComponentFilterConfigs, ComponentDashboardConfigs } from 'src/configs/generalConfig.interface';
+import { BodyBuilderService } from 'src/app/filters/services/bodyBuilder/body-builder.service';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -28,20 +29,31 @@ export class MapComponent extends ParentChart implements OnInit {
     private readonly cdr: ChangeDetectorRef,
     public readonly selectService: SelectService,
     public readonly store: Store<fromStore.AppState>,
+    private readonly bodyBuilderService: BodyBuilderService
   ) {
     super(cms, selectService, store);
   }
 
+  filterd = false;
+
   ngOnInit(): void {
     this.init('map');
+    const { source } = this.componentConfigs as ComponentFilterConfigs;
     this.buildOptions.subscribe((buckets: Array<Bucket>) => {
+      let filters = this.bodyBuilderService.getFiltersFromQuery().filter(element => Object.keys(element).indexOf(source + '.keyword') != -1)
+      if (filters.length)
+        this.filterd = true;
+      else
+        this.filterd = false;
       if (buckets) {
         this.chartOptions = this.setOptions(buckets);
       }
       this.cdr.detectChanges();
     });
   }
-
+  resetFilter() {
+    this.resetQ()
+  }
 
   private setOptions(buckets: Array<Bucket>): Highcharts.Options {
     return {

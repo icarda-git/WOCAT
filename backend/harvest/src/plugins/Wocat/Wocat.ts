@@ -2,7 +2,7 @@
 import { common } from "./common";
 import * as config from '../../../../config/index.json';
 import { Job, Queue } from "bull";
-export class Dspace extends common {
+export class Wocat extends common {
     startPage: number = 0; // starting page 
     pipe: number = 1; // how many jobs to be added at ones 
     repeatName: string = 'Repeat indexing with Cron ' + config.cron + ' for ' + this.repo.name;

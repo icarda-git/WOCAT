@@ -63,7 +63,6 @@ export class BarComponent extends ParentChart implements OnInit {
     );
     this.barService.setChartOptinos.subscribe(
       (series: Array<Highcharts.SeriesColumnOptions>) => {
-        console.log("bar update")
         if (series) {
           this.chartOptions = this.setOptions(series);
           if (this.chart) {

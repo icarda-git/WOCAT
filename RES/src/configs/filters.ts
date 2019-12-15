@@ -83,7 +83,7 @@ export const filtersConfig: GeneralConfigs[] = [
     component: 'SelectComponent',
     componentConfigs: {
       placeholder: 'Land use type(s)',
-      source: 'clean_Land use type.keyword',
+      source: 'Land use type.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -93,7 +93,7 @@ export const filtersConfig: GeneralConfigs[] = [
     component: 'SelectComponent',
     componentConfigs: {
       placeholder: 'Select Degradation type',
-      source: 'clean_Degradation type.keyword',
+      source: 'Degradation type.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -121,7 +121,7 @@ export const filtersConfig: GeneralConfigs[] = [
     componentConfigs: {
       helpText:'A, V, M, S in (i) ',
       placeholder: 'Select SLM measures',
-      source: 'clean_SLM measures.keyword',
+      source: 'SLM measures.keyword',
       addInMainQuery: true,
     } as ComponentFilterConfigs,
   },
@@ -140,7 +140,7 @@ export const filtersConfig: GeneralConfigs[] = [
     component: 'SelectComponent',
     componentConfigs: {
       placeholder: 'Annual rainfall',
-      source: 'Specify average annual rainfall (if known), in mm',
+      source: 'Average annual rainfall.keyword',
       addInMainQuery: false,
     } as ComponentFilterConfigs,
   },

@@ -10,6 +10,7 @@ import { Hits, Bucket, hits } from 'src/app/filters/services/interfaces';
 import { PageEvent } from '@angular/material';
 import { AgmMap } from '@agm/core';
 import { SelectService } from 'src/app/filters/services/select/select.service';
+import { BodyBuilderService } from 'src/app/filters/services/bodyBuilder/body-builder.service';
 
 
 declare function _altmetric_embed_init(): any;
@@ -22,7 +23,7 @@ interface marker {
 @Component({
   selector: 'app-google-maps',
   templateUrl: './google-maps.component.html',
-  providers: [ScrollHelperService,SelectService],
+  providers: [ScrollHelperService, SelectService],
   styleUrls: ['./google-maps.component.scss']
 })
 export class GoogleMapsComponent extends ParentComponent implements OnInit {
@@ -35,6 +36,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
   isFullscreen: boolean = false;
   fitBounds: boolean = false;
   refreshMap = true;
+  filterd = false;
   myStyles = {
     height: '430px'
   }
@@ -50,12 +52,21 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
     public readonly scrollHelperService: ScrollHelperService,
     public readonly selectService: SelectService,
     private readonly cdr: ChangeDetectorRef,
+    private readonly bodyBuilderService: BodyBuilderService,
 
   ) {
     super();
   }
-  filterMarker(code){
-    const query: bodybuilder.Bodybuilder = this.selectService.addNewValueAttributetoMainQuery('id',code);
+
+  resetQ() {
+    this.filterd = false;
+    const query: bodybuilder.Bodybuilder = this.selectService.resetValueAttributetoMainQuery('id');
+    this.store.dispatch(new fromStore.SetQuery(query.build()));
+    this.selectService.resetNotification();
+  }
+  filterMarker(code) {
+    this.filterd = true;
+    const query: bodybuilder.Bodybuilder = this.selectService.addNewValueAttributetoMainQuery('id', code);
     this.store.dispatch(new fromStore.SetQuery(query.build()));
     this.selectService.resetNotification();
   }
@@ -66,16 +77,9 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
 
     setTimeout(() => {
       this.myStyles.height = this.elementView.nativeElement.offsetHeight ? (this.elementView.nativeElement.offsetHeight - 65) + 'px' : '430px';
-      console.log(this.myStyles.height)
       this.refreshMap = true;
     }, 100);
   }
-
-  ngAfterViewInit() {
-    //if (this.elementView)
-    console.log(this.elementView.nativeElement)
-  }
-
 
   makeChunks(markers) {
     if (markers.length >= 1000)
@@ -110,6 +114,7 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
 
   ngOnInit(): void {
     //this.myStyles.height = this.elementView.nativeElement.offsetHeight.value;
+
     this.scrollHelperService.storeVal = this.store;
     this.seeIfThisCompInView();
     this.scrollHelperService.dataIsReadyArrived
@@ -145,6 +150,12 @@ export class GoogleMapsComponent extends ParentComponent implements OnInit {
     this.store
       .select(fromStore.getBuckets, source)
       .subscribe((b: Bucket[]) => {
+
+        let filters = this.bodyBuilderService.getFiltersFromQuery().filter(element => Object.keys(element).indexOf('id' + '.keyword') != -1)
+        if (filters.length)
+          this.filterd = true;
+        else
+          this.filterd = false;
         this.timeout.forEach(element => {
           clearTimeout(element);
         });

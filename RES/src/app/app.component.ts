@@ -63,7 +63,6 @@ export class AppComponent implements OnInit {
     if (window && window.localStorage) {
       // localStorage supported
       let isnewuser = localStorage.getItem("newuser");
-      console.log(isnewuser);
       if (isnewuser != "no") {
         setTimeout(() => {
           this.startTour();

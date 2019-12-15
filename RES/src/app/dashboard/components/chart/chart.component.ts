@@ -36,12 +36,21 @@ export class ChartComponent {
   @Input() chartOptions: Highcharts.Options;
   @Output() expanded: EventEmitter<boolean>;
   @Output() chartInstance: EventEmitter<Highcharts.Chart>;
+  @Output() resetFilter: EventEmitter<boolean>;
   @ViewChild('clickToEnable') clickToEnable: ElementRef;
+  @Input() filterd = false;
   Highcharts = Highcharts;
   constructor() {
     this.expanded = new EventEmitter<boolean>();
+    this.resetFilter = new EventEmitter<boolean>();
     this.chartInstance = new EventEmitter<Highcharts.Chart>();
   }
+
+  notifyFilter(): void {
+    this.resetFilter.emit(true);
+  }
+
+  
 
   notifyExpanded(b: boolean): void {
     this.expanded.emit(b);

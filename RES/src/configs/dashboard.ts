@@ -129,7 +129,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'pie2',
       title: 'Land use types',
-      source: 'clean_Land use type',
+      source: 'Land use type',
       description: `
           All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
@@ -249,7 +249,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'SLMmeasures',
       title: 'SLM measures',
-      source: 'clean_SLM measures',
+      source: 'SLM measures',
       description: `
       A, V, M, S in (i)  M measures by number of SLM Data.
           Click on ICONS:expand_less to collapse the list.
@@ -268,7 +268,7 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'Degradation',
       title: 'Degradation type',
-      source: 'clean_Degradation type',
+      source: 'Degradation type',
       description: `
           All CRPs and platforms tagged across all SLM Data
           are represented here and ordered by quantity of tags for

@@ -60,7 +60,13 @@ export class SelectService {
     };
     return this.bodyBuilderService.buildquery(bq);
   }
-  // to add new value to same surce 
+ // to reset source filters 
+  resetValueAttributetoMainQuery(source: string) {
+    return this.addAttributeToMainQuery({
+      [source + '.keyword']: []
+    } as QueryFilterAttribute);
+  }
+  // to add new value to same source 
   addNewValueAttributetoMainQuery(source: string, value) {
     const filteredArray = this.bodyBuilderService.getFiltersFromQuery().filter(element => Object.keys(element).indexOf(source + '.keyword') != -1)
     //console.log(filteredArray)

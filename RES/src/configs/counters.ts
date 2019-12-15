@@ -8,7 +8,7 @@ export const countersConfig: GeneralConfigs[] = [
     show: true,
     componentConfigs: {
       id: 'counters',
-      title: 'Total Items',
+      title: 'Total SLM Practices',
       source: 'total',
       description: `
         Total number of SLM Data found

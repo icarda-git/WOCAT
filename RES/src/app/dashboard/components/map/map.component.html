@@ -1,12 +1,5 @@
-<app-chart
-  [isMap]="true"
-  [title]="componentConfigs.title"
-  [description]="componentConfigs.description"
-  [expandedStatus]="cms.getExpanded"
-  [userSeesMe]="cms.getViewState?.userSeesMe"
-  [loading]="cms.getLoading"
-  [loadingHits$]="cms.getLoadingHits$"
-  [chartOptions]="chartOptions"
-  (expanded)="cms.disPatchSetInView($event)"
->
+<app-chart [isMap]="true" [title]="componentConfigs.title" [description]="componentConfigs.description"
+  [expandedStatus]="cms.getExpanded" [userSeesMe]="cms.getViewState?.userSeesMe" [loading]="cms.getLoading"
+  [loadingHits$]="cms.getLoadingHits$" [chartOptions]="chartOptions" [filterd]="filterd"
+  (expanded)="cms.disPatchSetInView($event)" (resetFilter)="resetFilter($event)">
 </app-chart>
