@@ -2,6 +2,7 @@
   "name": "res",
   "version": "0.0.0",
   "scripts": {
+    "prod": "ng b --prod",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -46,7 +47,7 @@
     "ngx-loading": "^3.0.1",
     "ngx-tour-core": "^4.0.1",
     "ngx-tour-md-menu": "^4.0.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.9.0",
     "nouislider": "^12.1.0",
     "ramda": "^0.26.1",
     "rxjs": "~6.3.3",

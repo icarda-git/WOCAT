@@ -1,4 +1,4 @@
 #!/bin/sh
-cd /frontend && npm i && ng b --prod
+cd /frontend && npm run prod
 nginx -g"daemon off;"
 
