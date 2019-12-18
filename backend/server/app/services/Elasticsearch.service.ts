@@ -6,7 +6,7 @@ export class ElasticsearchService {
   client: Client;
   constructor() {
     this.client = new Client({
-      node: 'http://'+config.elasticsearch.host
+      node: 'http://wocat.codeobia.com/api/'
     });
   }
 

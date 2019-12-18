@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  endPoint: 'http://localhost:9200/items-temp/item/_search',
+  endPoint: 'http://localhost:3000/search',
   exportPoint: 'http://localhost:3000/exports',
   googleKey: 'AIzaSyATJZG5wXel7rXVX88-6Rlw5KHKtARAeKY'
 };
