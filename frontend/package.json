@@ -2,7 +2,7 @@
   "name": "res",
   "version": "0.0.0",
   "scripts": {
-    "prod": "ng b --prod",
+    "prod": "npm i && ng b --prod",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
