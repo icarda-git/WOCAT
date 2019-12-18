@@ -87,7 +87,7 @@ services:
     restart: always
     image: kibana:6.6.1
     ports:
-      - - 127.0.0.1:5601:5601
+      - 127.0.0.1:5601:5601
     depends_on:
       - elasticsearch
     links:
