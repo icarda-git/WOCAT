@@ -2,7 +2,7 @@
   "name": "res",
   "version": "0.0.0",
   "scripts": {
-    "prod": "npm i && ng b --prod",
+    "prod": "npm i && ng b --prod --base-href=/explorer/ ",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
