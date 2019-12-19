@@ -10,17 +10,18 @@ import { ParentChart } from '../parent-chart';
 import { Bucket } from 'src/app/filters/services/interfaces';
 import * as fromStore from '../../../../store';
 import { Store } from '@ngrx/store';
+import { XAxisOptions } from 'highcharts'
 import { SelectService } from 'src/app/filters/services/select/select.service';
 import { BodyBuilderService } from 'src/app/filters/services/bodyBuilder/body-builder.service';
 import { ComponentFilterConfigs } from 'src/configs/generalConfig.interface';
 @Component({
-  selector: 'app-pie',
-  templateUrl: './pie.component.html',
-  styleUrls: ['./pie.component.scss'],
+  selector: 'app-column',
+  templateUrl: './column.component.html',
+  styleUrls: ['./column.component.scss'],
   providers: [ChartMathodsService, SelectService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PieComponent extends ParentChart implements OnInit {
+export class ColumnComponent extends ParentChart implements OnInit {
   constructor(
     cms: ChartMathodsService,
     private readonly cdr: ChangeDetectorRef,
@@ -35,7 +36,7 @@ export class PieComponent extends ParentChart implements OnInit {
     this.resetQ()
   }
   ngOnInit(): void {
-    this.init('pie');
+    this.init('column');
     const { source } = this.componentConfigs as ComponentFilterConfigs;
     this.buildOptions.subscribe((buckets: Array<Bucket>) => {
       let filters = this.bodyBuilderService.getFiltersFromQuery().filter(element => Object.keys(element).indexOf(source + '.keyword') != -1)
@@ -49,26 +50,9 @@ export class PieComponent extends ParentChart implements OnInit {
       this.cdr.detectChanges();
     });
   }
-  mapData(b) {
-    let colors = {
-      "Cropland": "#f5d700",
-      "Waterways, waterbodies, wetlands": "#5b99d6",
-      "Grazing land": "#8f7b62",
-      "Settlements, infrastructure": "#869da3",
-      "Forest/ woodlands": "#1e6930",
-      "Unproductive land": "#b2c5c1",
-      "Mixed (crops/ grazing/ trees), incl. agroforestry": "#99c003",
-    }
-
-    return ({ name: b.key.substr(0, 50), y: b.doc_count, color: colors[b.key] ? colors[b.key] : null })
-  }
 
   private setOptions(buckets: Array<Bucket>): Highcharts.Options {
     return {
-      chart: {
-        type: 'pie',
-        animation: false,
-      },
       boost: {
         enabled: false,
         useGPUTranslations: false,
@@ -81,23 +65,30 @@ export class PieComponent extends ParentChart implements OnInit {
             }
           }
         },
-        pie: {
-          cursor: 'pointer',
-          showInLegend: true,
-          tooltip: {
-            pointFormat: ' <b>{point.y}</b>',
-            headerFormat: '{point.key}:',
-          },
-          dataLabels: {
-            enabled: false,
-          },
-        },
       },
+      chart: {
+        inverted: true,
+        polar: false
+      },
+      xAxis: {
+        title: {
+          text: "users in the area having adopted the technology"
+        },
+        categories: buckets.map((b: Bucket) => b.key.substr(0, 50)),
+      } as XAxisOptions,
+      yAxis: {
+        title: {
+          text: "Number of technologies"
+        }
+      } as XAxisOptions,
       series: [
         {
+          name: 'Number of technologies',
           animation: true,
-          type: 'pie',
-          data: buckets.map((b: Bucket) => this.mapData(b)),
+          type: 'column',
+          colorByPoint: true,
+          showInLegend: false,
+          data: buckets.map((b: Bucket) => ({ name: b.key.substr(0, 50), y: b.doc_count })),
         },
       ],
       ...this.cms.commonProperties(),

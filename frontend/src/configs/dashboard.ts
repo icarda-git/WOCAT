@@ -159,20 +159,19 @@ export const dashboardConfig: GeneralConfigs[] = [
       icon: 'pie_chart'
     },
     tour: true
-  }
-  ,
+  },
   {
-    class: 'col-md-6 no-side-padding',
     show: true,
-    component: 'ListComponent',
+    class: 'col-md-6 no-side-padding',
+    component: 'ColumnComponent',
     componentConfigs: {
-      id: 'funders',
-      title: 'Institutions',
-      source: 'Name of institution',
+      id: 'pie4',
+      title: 'Number of users in the area having adopted the technology',
+      source: 'Of all those who have adopted the Technology, how many have did so spontaneously, i.e. without receiving any material incentives/ payments?',
       description: `
-          All funders tagged across all SLM Data are represented here and
-          orderd by quantity of tags for each funder. Scroll down to see more results.
-          Click on ICONS:expand_less to collapse the list.
+          All the available SLM Data are represented here and disaggregated by Type.
+          You can toggle on/off individual type of visualization in the list at the right side of
+          the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
     } as ComponentDashboardConfigs,
     scroll: {
@@ -180,7 +179,6 @@ export const dashboardConfig: GeneralConfigs[] = [
     },
     tour: true
   },
-
   // {
   //   show: true,
   //   class: 'col-md-6 no-side-padding',
@@ -203,27 +201,27 @@ export const dashboardConfig: GeneralConfigs[] = [
   // },
 
 
-  {
-    show: true,
-    class: 'col-md-12 mt-3 no-side-padding',
-    component: 'BarComponent',
-    componentConfigs: {
-      id: 'barchart',
-      source: ['Specify how the Technology was introduced', 'Of all those who have adopted the Technology, how many have did so spontaneously, i.e. without receiving any material incentives/ payments?.keyword'],
-      title: 'Info Products Analytics',
-      chartType: 'column',
-      description: `
-            All SLM Data are represented here and can be further disaggregated by two variables at the same time The
-            filters automatically pre-select those options that have the most results, helping you to access your
-            information faster. Click on ICONS:view_headline to export
-            this graphic, click on ICONS:expand_less to collapse it.
-      `
-    } as ComponentDashboardConfigs,
-    scroll: {
-      icon: 'bar_chart'
-    },
-    tour: true
-  },
+  // {
+  //   show: true,
+  //   class: 'col-md-12 mt-3 no-side-padding',
+  //   component: 'BarComponent',
+  //   componentConfigs: {
+  //     id: 'barchart',
+  //     source: ['Specify how the Technology was introduced', 'Of all those who have adopted the Technology, how many have did so spontaneously, i.e. without receiving any material incentives/ payments?.keyword'],
+  //     title: 'Info Products Analytics',
+  //     chartType: 'column',
+  //     description: `
+  //           All SLM Data are represented here and can be further disaggregated by two variables at the same time The
+  //           filters automatically pre-select those options that have the most results, helping you to access your
+  //           information faster. Click on ICONS:view_headline to export
+  //           this graphic, click on ICONS:expand_less to collapse it.
+  //     `
+  //   } as ComponentDashboardConfigs,
+  //   scroll: {
+  //     icon: 'bar_chart'
+  //   },
+  //   tour: true
+  // },
   // {
   //   class: 'col-md-6 mt-3 no-side-padding',
   //   show: true,

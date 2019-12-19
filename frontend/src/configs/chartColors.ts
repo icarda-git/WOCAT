@@ -7,9 +7,9 @@ const selectMapColors = {
 };
 
 const axisColorForMap = {
-  minColor: '#f6decb',
-  midColor: '#dc7d35',
-  maxColor: '#d8640c'
+  minColor: '#a5a19b',
+  midColor: '#7e7970',
+  maxColor: '#5f594f'
 };
 
 const legendTextColorForPie = '#000000';

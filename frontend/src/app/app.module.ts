@@ -77,6 +77,7 @@ import { NgSplitPipeModule, NgFirstOrDefaultPipeModule, NgHeadPipeModule, NgTrun
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { TruncateModule } from '@yellowspot/ng-truncate';
 import { NgxFlickingModule } from '@egjs/ngx-flicking';
+import { ColumnComponent } from './dashboard/components/column/column.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,6 +104,7 @@ import { NgxFlickingModule } from '@egjs/ngx-flicking';
     TagsComponent,
     SnackComponent,
     PieComponent,
+    ColumnComponent,
     WordcloudComponent,
     MapComponent,
     GetFirstImage,
@@ -172,6 +174,7 @@ import { NgxFlickingModule } from '@egjs/ngx-flicking';
     WelcomeComponent,
     SnackComponent,
     PieComponent,
+    ColumnComponent,
     WordcloudComponent,
     MapComponent,
     LineComponent,
