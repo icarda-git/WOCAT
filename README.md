@@ -1,5 +1,5 @@
 
-# Open Repository Explorer and Visualizer
+# WOCAT Visualizer
 
   
   
