@@ -68,10 +68,10 @@ export const dashboardConfig: GeneralConfigs[] = [
       source: 'Country',
       title: 'Nr. of case studies per country',
       description: `
-          Geographic tags for all the SLM Data found are represented here and disaggregated by
-          country. The darker the color the higher the number of SLM Data tagged to that specific
+          Geographic tags for all the SLM Practices found are represented here and disaggregated by
+          country. The darker the color the higher the number of SLM Practices tagged to that specific
           country. Overall, the graphic shows the world areas targeted by research activities that produced
-          SLM Data. Click on ICONS:view_headline
+          SLM Practices. Click on ICONS:view_headline
           to export this graphic, click on ICONS:expand_less
           to collapse it.
       `
@@ -90,10 +90,9 @@ export const dashboardConfig: GeneralConfigs[] = [
       source: 'map_points',
       title: 'Location of documented SLM',
       description: `
-          Geographic tags for all the SLM Data found are represented here and disaggregated by
-          country. The darker the color the higher the number of SLM Data tagged to that specific
-          country. Overall, the graphic shows the world areas targeted by research activities that produced
-          SLM Data. Click on ICONS:view_headline
+          Geographic tags for all the SLM Practices found are represented here and disaggregated by
+          country. Orange: Approaches, Green: Technologies.
+          SLM Practices. Click on ICONS:view_headline
           to export this graphic, click on ICONS:expand_less
           to collapse it.
       `
@@ -112,7 +111,6 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Main purpose(s) of the Technology (land user’s perspective)',
       source: 'Main purpose(s) of the Technology (land user’s perspective)',
       description: `
-          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
@@ -131,7 +129,6 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Land use types',
       source: 'Land use type',
       description: `
-          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
@@ -150,7 +147,6 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Origin / Introduction',
       source: 'Specify how the Technology was introduced',
       description: `
-          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
@@ -167,9 +163,8 @@ export const dashboardConfig: GeneralConfigs[] = [
     componentConfigs: {
       id: 'pie4',
       title: 'Number of users in the area having adopted the technology',
-      source: 'Of all those who have adopted the Technology, how many have did so spontaneously, i.e. without receiving any material incentives/ payments?',
+      source: 'How many land users in the area have adopted/implemented the Technology?',
       description: `
-          All the available SLM Data are represented here and disaggregated by Type.
           You can toggle on/off individual type of visualization in the list at the right side of
           the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
       `
@@ -188,7 +183,7 @@ export const dashboardConfig: GeneralConfigs[] = [
   //     title: 'Land use rights',
   //     source: 'Land use rights',
   //     description: `
-  //         All the available SLM Data are represented here and disaggregated by Type.
+  //         All the available SLM Practices are represented here and disaggregated by Type.
   //         You can toggle on/off individual type of visualization in the list at the right side of
   //         the graphic. Click on ICONS:view_headline to export this graphic, click on ICONS:expand_less to collapse it.
   //     `
@@ -211,7 +206,7 @@ export const dashboardConfig: GeneralConfigs[] = [
   //     title: 'Info Products Analytics',
   //     chartType: 'column',
   //     description: `
-  //           All SLM Data are represented here and can be further disaggregated by two variables at the same time The
+  //           All SLM Practices are represented here and can be further disaggregated by two variables at the same time The
   //           filters automatically pre-select those options that have the most results, helping you to access your
   //           information faster. Click on ICONS:view_headline to export
   //           this graphic, click on ICONS:expand_less to collapse it.
@@ -231,7 +226,7 @@ export const dashboardConfig: GeneralConfigs[] = [
   //     title: 'SLM groups',
   //     source: 'SLM group',
   //     description: `
-  //         The top twenty Authors by number of SLM Data.
+  //         The top twenty Authors by number of SLM Practices.
   //         Click on ICONS:expand_less to collapse the list.
   //     `
   //   } as ComponentDashboardConfigs,
@@ -249,7 +244,6 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'SLM measures',
       source: 'SLM measures',
       description: `
-      A, V, M, S in (i)  M measures by number of SLM Data.
           Click on ICONS:expand_less to collapse the list.
       `
     } as ComponentDashboardConfigs,
@@ -268,10 +262,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       title: 'Degradation type',
       source: 'Degradation type',
       description: `
-          All CRPs and platforms tagged across all SLM Data
-          are represented here and ordered by quantity of tags for
-          each CRP or platform. Scroll down to see more results.
-          Click on ICONS:expand_less to collapse the list.
+      Click on ICONS:expand_less to collapse the list.
       `
     } as ComponentDashboardConfigs,
     scroll: {
@@ -287,8 +278,7 @@ export const dashboardConfig: GeneralConfigs[] = [
       id: 'paginatedList',
       title: 'Info Producs List of Results',
       description: `
-          All SLM Data found are represented here, You can sort this list by "Date",
-          "Type", "Authors", "Altmetric: Attention Score" and "Views & Downloads" info.
+          All SLM Practices found are represented here, You can sort this list by "Date".
           Click on ICONS:expand_less to collapse the list.
       `,
       content: {

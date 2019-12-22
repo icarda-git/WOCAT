@@ -2,7 +2,7 @@
   <a target="_blank" class="primary-text" rel="noopener"
     [href]="'https://qcat.wocat.net/en/wocat/technologies/view/'+source.id+'/'">
     <h2 [ngClass]="(source.id | split:'_' | head)  == 'technologies'? 'is-technologies' :'is-approach'">
-      {{ source[content.title] }}
+      {{ source[content.title] }} {{ source.Country.length ? '['+source.Country[0]+']':'' }}
     </h2>
   </a>
   <p *ngIf="source[content.description] || source['Short description of the Approach'] ">

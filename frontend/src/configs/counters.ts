@@ -11,7 +11,7 @@ export const countersConfig: GeneralConfigs[] = [
       title: 'Total SLM Practices',
       source: 'total',
       description: `
-        Total number of SLM Data found
+        Including Technologies and Approaches
       `,
     } as ComponentCounterConfigs,
     scroll: {
@@ -27,8 +27,7 @@ export const countersConfig: GeneralConfigs[] = [
       source: 'slm_type.keyword',
       filter: 'technologies',
       description: `
-        Total number of SLM Data freely
-        accessible and usable as by license applied.
+      An SLM Technology is a land management practice that controls land degradation and enhances productivity and/ or other ecosystem services.
       `,
       percentageFromTotal: true,
     } as ComponentCounterConfigs,
@@ -42,8 +41,7 @@ export const countersConfig: GeneralConfigs[] = [
       source: 'slm_type.keyword',
       filter: 'approaches',
       description: `
-        Total number of SLM Data only
-        accesible as by publisher's specifications.
+      An SLM Approach defines the ways and means used to implement an SLM Technology, including the stakeholders involved and their roles.
       `,
       percentageFromTotal: true,
     } as ComponentCounterConfigs,
@@ -56,8 +54,7 @@ export const countersConfig: GeneralConfigs[] = [
       title: 'Institutions',
       source: 'Name of institution.keyword',
       description: `
-        Total number of SLM Data only accessible
-        as by publisher's specifications.
+      Institutions involved.
       `,
     } as ComponentCounterConfigs,
     tour: true,
@@ -65,12 +62,11 @@ export const countersConfig: GeneralConfigs[] = [
   {
     show: true,
     componentConfigs: {
-      id: 'CRPs&Platforms',
+      id: 'SLM_specialists',
       title: 'SLM specialists',
       source: 'SLM specialist.keyword',
       description: `
-        Total number of people involved with he information
-        product found
+      Involved SLM Specialists registered in the WOCAT database
       `,
     } as ComponentCounterConfigs,
     tour: true,
@@ -82,8 +78,7 @@ export const countersConfig: GeneralConfigs[] = [
       title: 'Countries',
       source: 'Country.keyword',
       description: `
-        Total number of SLM Data only accessible
-        as by rights specifications.
+      Countries with documented Technologies and/or Approaches
       `,
     } as ComponentCounterConfigs,
     tour: true,

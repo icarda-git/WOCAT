@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  endPoint: 'http://wocat.codeobia.com/api/items-temp/_search',
+  endPoint: 'http://wocat.codeobia.com/explorer/api/search',
   exportPoint: 'http://localhost:3000/exports',
   googleKey: 'AIzaSyATJZG5wXel7rXVX88-6Rlw5KHKtARAeKY'
 };
