@@ -86,11 +86,15 @@ export class MainBodyBuilderService extends BuilderUtilities {
     everything: boolean = true
   ): bodybuilder.Bodybuilder {
     const b: bodybuilder.Bodybuilder = bodybuilder();
+    ["Uzbekistan", "Tajikistan", "Kyrgyzstan", "khazakistan", "Turkmenistan"].forEach(c => {
+      b.orFilter('match', { 'Country.keyword': c })
+    })
     if (everything) {
       this.addCounterAgg(b);
     }
     this.addQueryAttributes(b);
     this.sortHitsQuery(b, from);
+
     return b;
   }
 
@@ -146,7 +150,7 @@ export class MainBodyBuilderService extends BuilderUtilities {
     }
     // bitstreams needed for the images
     // handle needed for the altmetric
-    rows.push('thumbnail', 'handle','Country', 'bitstreams', 'Image','Short description of the Approach');
+    rows.push('thumbnail', 'handle', 'Country', 'bitstreams', 'Image', 'Short description of the Approach');
     return rows;
   }
 

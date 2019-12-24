@@ -5,7 +5,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { ChartMathodsService } from '../services/chartCommonMethods/chart-mathods.service';
-const mapWorld = require('@highcharts/map-collection/custom/world-robinson-highres.geo.json');
+const mapWorld = require('@highcharts/map-collection/custom/asia.geo.json');
 import * as Highcharts from 'highcharts';
 import { axisColorForMap, selectMapColors } from 'src/configs/chartColors';
 import { ParentChart } from '../parent-chart';

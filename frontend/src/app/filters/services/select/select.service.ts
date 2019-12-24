@@ -58,6 +58,7 @@ export class SelectService {
       source: this.source,
       term: bqa.term,
     };
+   
     return this.bodyBuilderService.buildquery(bq);
   }
  // to reset source filters 

@@ -92,6 +92,9 @@ export class BodyBuilderService {
     } else {
       this.addInclude(term, termRules);
     }
+    ["Uzbekistan", "Tajikistan", "Kyrgyzstan", "khazakistan", "Turkmenistan"].forEach(c => {
+      query.orFilter('match', { 'Country.keyword': c })
+    })
     return query.aggregation('terms', termRules, source);
   }
 

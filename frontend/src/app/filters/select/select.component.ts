@@ -171,6 +171,7 @@ export class SelectComponent extends ParentComponent implements OnInit {
       size: this.size,
       term: this.typedTerm ? this.typedTerm : null
     };
+   
     return this.selectService.buildquery(bq).build();
   }
 

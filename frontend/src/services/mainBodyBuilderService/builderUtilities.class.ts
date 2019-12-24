@@ -69,7 +69,6 @@ export class BuilderUtilities {
       b.query('query_string', this.aggAttributes[key].query_string)
     }
     else {
-      console.log(this.aggAttributes[key]);
       this.aggAttributes[key].forEach((s: string) =>
         this.or ? b.orFilter('term', key, s) : b.filter('term', key, s)
       );
