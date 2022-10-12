@@ -23,7 +23,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "docx-pdf": "0.0.1",
-    "docxtemplater": "^3.13.6",
+    "docxtemplater": "^3.31.5",
     "express": "^4.17.1",
     "jszip": "^2.6.1",
     "ora": "^3.4.0",
