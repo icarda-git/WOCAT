@@ -24,7 +24,7 @@
     "cors": "^2.8.5",
     "docx-pdf": "0.0.1",
     "docxtemplater": "^3.13.6",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jszip": "^2.6.1",
     "ora": "^3.4.0",
     "ts-node-dev": "^1.0.0-pre.40",
